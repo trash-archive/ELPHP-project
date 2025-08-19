@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyNotes</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <div class="container-fluid vh-100">
+    <div class="row h-100 flex-md-row flex-column">
+
+      <!-- Sidebar -->
+      <div id="sidebar" class="col-md-3 col-12 border-end bg-white d-flex flex-column p-3 collapse show">
+
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="d-flex align-items-center">
+            <i class="bi bi-book me-2"></i>
+            <h5 class="fw-bold fs-4 mb-0">MyNotes</h5>
+          </div>
+            <!-- Profile Dropdown -->
+          <div class="dropdown">
+            <a href="#" class="text-dark" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person fs-5"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+            <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="login.html">Logout</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Search -->
+        <div class="mb-3 position-relative">
+          <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+          <input type="text" class="form-control ps-5" placeholder="Search notes...">
+        </div>
+
+        <!-- New Note Button -->
+        <div class="d-grid mb-3">
+          <button class="btn btn-primary w-100" onclick="showCreateNote()">
+            <i class="bi bi-plus"></i> New Note
+          </button>
+        </div>
+
+        <!-- Notes List -->
+        <div class="list-group">
+          <button class="list-group-item list-group-item-action" onclick="openNote()">
+            <div class="d-flex w-100 justify-content-between">
+              <h6 class="mb-1">Welcome to Your Notes</h6>
+            </div>
+            <p class="mb-1 text-truncate text-secondary">This is your first note. You can edit, delete, or create...</p>
+            <small class="d-flex justify-content-end text-secondary">Aug 18, 2025</small>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div id="main-content" class="col bg-white p-4">
+
+        <!-- Mobile toggle button -->
+        <div class="d-md-none mb-3">
+          <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar">
+            <i class="bi bi-list"></i> Menu
+          </button>
+        </div>
+
+        <!-- Empty State (centered only when visible) -->
+        <div id="empty-state" class="h-100 d-flex flex-column justify-content-center align-items-center text-center">
+          <i class="bi bi-book fs-1 text-muted mb-2"></i>
+          <h5 class="fw-semibold">No Note Selected</h5>
+          <p class="text-muted">Choose a note from the sidebar or create a new one</p>
+          <button class="btn btn-primary" onclick="showCreateNote()">
+            <i class="bi bi-plus"></i> Create Your First Note
+          </button>
+        </div>
+
+        <!-- Create Note Form (hidden initially, aligned to top) -->
+        <div id="create-note" class="w-100 d-none p-4">
+          <h4 class="fw-bold fs-4 mb-2">Create New Note</h4>
+          <p class="text-muted mb-3">Write your thoughts, ideas, or important information.</p>
+
+          <input type="text" class="form-control mb-3" placeholder="Note title...">
+          <textarea class="form-control mb-3" rows="6" placeholder="Start writing..."></textarea>
+
+          <div class="d-flex gap-2">
+            <button class="btn btn-primary">Save Note</button>
+            <button class="btn btn-outline-secondary" onclick="showEmptyState()">Cancel</button>
+          </div>
+        </div>
+
+        <!-- Note Viewer (hidden initially, aligned to top) -->
+        <div id="note-viewer" class="w-100 d-none p-4">
+          <div class="d-flex justify-content-between align-items-start mb-2">
+            <h4 class="fw-bold">Welcome to Your Notes</h4>
+            <div class="d-flex gap-2">
+              <button class="btn btn-light" onclick="showCreateNote()">
+                <i class="bi bi-pencil"></i>
+              </button>
+              <button class="btn btn-light">
+                <i class="bi bi-clipboard"></i>
+              </button>
+            </div>
+          </div>
+          <p class="text-muted"><i class="bi bi-calendar"></i> Aug 18, 2025, 10:30 AM</p>
+          <hr class="mb-3">
+
+          <p>This is your first note. You can edit, delete, or create new notes using the interface.</p>
+          <p>You can organize your thoughts, take meeting notes, jot down ideas, or keep track of important information. The search functionality helps you quickly find what you're looking for.</p>
+          <p>Feel free to customize this note or delete it and start fresh with your own content.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function showCreateNote() {
+      document.getElementById('empty-state').classList.add('d-none');
+      document.getElementById('note-viewer').classList.add('d-none');
+      document.getElementById('create-note').classList.remove('d-none');
+    }
+    function showEmptyState() {
+      document.getElementById('create-note').classList.add('d-none');
+      document.getElementById('note-viewer').classList.add('d-none');
+      document.getElementById('empty-state').classList.remove('d-none');
+    }
+    function openNote() {
+      document.getElementById('empty-state').classList.add('d-none');
+      document.getElementById('create-note').classList.add('d-none');
+      document.getElementById('note-viewer').classList.remove('d-none');
+    }
+  </script>
+</body>
+</html>
