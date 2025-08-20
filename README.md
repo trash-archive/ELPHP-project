@@ -5,6 +5,15 @@ This project includes user registration, login, password reset (with OTP simulat
 
 ---
 
+## Members
+
+- **Luis Wayne Christian E. Mahusay**
+- **Jhon Mark A. Panimdim**
+- **Eufemio L. Capoy**
+- **Hasim W. Tordios**
+
+---
+
 ## Features
 
 - User Registration & Login (UI only)
@@ -73,6 +82,34 @@ Using XAMPP (Recommended for Windows)
 
 ---
 
+## Screenshots
+
+### Landing Page (`index.html`)
+![Landing Page](assets/images/screenshot_index.png)
+
+### Register Page (`register.html`)
+![Register Page](assets/images/screenshot_register.png)
+
+### Login Page (`login.html`)
+![Login Page](assets/images/screenshot_login.png)
+
+### Forgot Password Page (`forgot.html`)
+![Forgot Password Page](assets/images/screenshot_forgot.png)
+
+### OTP Verification Page (`otp_code.html`)
+![OTP Verification Page](assets/images/screenshot_otp.png)
+
+### New Password Page (`newpassword.html`)
+![New Password Page](assets/images/screenshot_newpassword.png)
+
+### Dashboard (`dashboard.html`)
+![Dashboard](assets/images/screenshot_dashboard.png)
+
+### Profile Page (`profile.html`)
+![Profile Page](assets/images/screenshot_profile.png)
+
+---
+
 ## Notes
 
 - **This project is frontend/UI only.**  
@@ -85,9 +122,3 @@ Using XAMPP (Recommended for Windows)
 
 - Replace images in `assets/images/` as needed.
 - Update HTML and JS for real backend integration if required.
-
----
-
-## License
-
-MIT
