@@ -87,6 +87,9 @@ Using XAMPP (Recommended for Windows)
 ### Landing Page (`index.html`)
 ![Landing Page](assets/images/screenshot_index.png)
 
+### Landing Page2 ('index.html')
+![Landing Page](assets/images/screenshot_index2.png)
+
 ### Register Page (`register.html`)
 ![Register Page](assets/images/screenshot_register.png)
 
