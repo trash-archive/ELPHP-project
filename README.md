@@ -30,18 +30,27 @@ This project includes user registration, login, password reset (with OTP simulat
 ELPHP-project/
 │
 ├── assets/
-│   └── images/         # Images used in the UI
-├── dashboard.html      # Main notes dashboard
-├── forgot.html         # Forgot password page
-├── index.html          # Landing page
-├── login.html          # Login page
-├── newpassword.html    # Set new password page
-├── otp_code.html       # OTP verification page
-├── profile.html        # User profile page
-├── register.html       # Registration page
-└── .vscode/
-    └── launch.json     # VS Code launch config
-```
+│   └── images/
+│       ├── screenshot_dashboard.PNG
+│       ├── screenshot_forgot.PNG
+│       ├── screenshot_index.PNG
+│       ├── screenshot_index2.PNG
+│       ├── screenshot_login.PNG
+│       ├── screenshot_newpassword.PNG
+│       ├── screenshot_otp.PNG
+│       ├── screenshot_profile.PNG
+│       └── screenshot_register.PNG
+│
+├── dashboard.html
+├── forgot.html
+├── index.html
+├── login.html
+├── newpassword.html
+├── otp_code.html
+├── profile.html
+├── register.html
+│
+├── README.md
 
 ---
 
