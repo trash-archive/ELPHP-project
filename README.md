@@ -5,6 +5,15 @@ This project includes user registration, login, password reset (with OTP simulat
 
 ---
 
+## Members
+
+- **Luis Wayne Christian E. Mahusay**
+- **Jhon Mark A. Panimdim**
+- **Eufemio L. Capoy**
+- **Hasim W. Tordios**
+
+---
+
 ## Features
 
 - User Registration & Login (UI only)
@@ -21,18 +30,27 @@ This project includes user registration, login, password reset (with OTP simulat
 ELPHP-project/
 │
 ├── assets/
-│   └── images/         # Images used in the UI
-├── dashboard.html      # Main notes dashboard
-├── forgot.html         # Forgot password page
-├── index.html          # Landing page
-├── login.html          # Login page
-├── newpassword.html    # Set new password page
-├── otp_code.html       # OTP verification page
-├── profile.html        # User profile page
-├── register.html       # Registration page
-└── .vscode/
-    └── launch.json     # VS Code launch config
-```
+│   └── images/
+│       ├── screenshot_dashboard.PNG
+│       ├── screenshot_forgot.PNG
+│       ├── screenshot_index.PNG
+│       ├── screenshot_index2.PNG
+│       ├── screenshot_login.PNG
+│       ├── screenshot_newpassword.PNG
+│       ├── screenshot_otp.PNG
+│       ├── screenshot_profile.PNG
+│       └── screenshot_register.PNG
+│
+├── dashboard.html
+├── forgot.html
+├── index.html
+├── login.html
+├── newpassword.html
+├── otp_code.html
+├── profile.html
+├── register.html
+│
+├── README.md
 
 ---
 
@@ -73,6 +91,37 @@ Using XAMPP (Recommended for Windows)
 
 ---
 
+## Screenshots
+
+### Landing Page (`index.html`)
+![Landing Page](assets/images/screenshot_index.png)
+
+### Landing Page2 ('index.html')
+![Landing Page](assets/images/screenshot_index2.png)
+
+### Register Page (`register.html`)
+![Register Page](assets/images/screenshot_register.png)
+
+### Login Page (`login.html`)
+![Login Page](assets/images/screenshot_login.png)
+
+### Forgot Password Page (`forgot.html`)
+![Forgot Password Page](assets/images/screenshot_forgot.png)
+
+### OTP Verification Page (`otp_code.html`)
+![OTP Verification Page](assets/images/screenshot_otp.png)
+
+### New Password Page (`newpassword.html`)
+![New Password Page](assets/images/screenshot_newpassword.png)
+
+### Dashboard (`dashboard.html`)
+![Dashboard](assets/images/screenshot_dashboard.png)
+
+### Profile Page (`profile.html`)
+![Profile Page](assets/images/screenshot_profile.png)
+
+---
+
 ## Notes
 
 - **This project is frontend/UI only.**  
@@ -85,9 +134,3 @@ Using XAMPP (Recommended for Windows)
 
 - Replace images in `assets/images/` as needed.
 - Update HTML and JS for real backend integration if required.
-
----
-
-## License
-
-MIT
