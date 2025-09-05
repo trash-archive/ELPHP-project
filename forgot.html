@@ -41,7 +41,7 @@
                                         <i class="bi bi-shield-lock text-white" style="font-size: 4rem;"></i>
                                     </div>
                                     <h2 class="text-white fw-bold mb-3">Password Recovery</h2>
-                                    <p class="text-white-50 mb-0">Enter your registered number to reset your password.</p>
+                                    <p class="text-white-50 mb-0">Enter your registered email to reset your password.</p>
                                 </div>
                             </div>
                             <!-- Right Side Form -->
@@ -51,16 +51,16 @@
                                     <div class="text-center mb-4">
                                         <i class="bi bi-question-circle text-primary" style="font-size: 3rem;"></i>
                                     </div>
-                                    <form method="POST" action="otp_code.html">
-                                        <!-- Number Input -->
+                                    <form id="forgotForm">
+                                        <!-- Email Input -->
                                         <div class="mb-4 position-relative">
                                             <input type="text" 
                                                 class="form-control border border-secondary rounded-2 ps-5" 
-                                                name="number" 
-                                                placeholder="Enter your number"
+                                                name="email" 
+                                                placeholder="Enter your email"
                                                 required>
                                             <span class="position-absolute top-50 start-0 translate-middle-y ms-3 text-secondary">
-                                                <i class="bi bi-phone"></i>
+                                                <i class="bi bi-envelope"></i>
                                             </span>
                                         </div>
                                         <button type="submit" class="btn btn-primary w-100 rounded-3 py-2 fw-bold mb-3">
@@ -110,5 +110,28 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $("#forgotForm").on("submit", function(e){
+            e.preventDefault();
+            $.ajax({
+                url: "forgot.php",
+                type: "POST",
+                data: $(this).serialize(),
+                dataType: "json",
+                success: function(res){
+                    if(res.success){
+                        alert(res.message);
+                        sessionStorage.setItem("email", $("input[name=email]").val());
+                        window.location.href = "otp_code.html";
+                    } else {
+                        alert(res.message);
+                    }
+                },
+                error: function(){ alert("Something went wrong."); }
+            });
+        });
+    </script>
+
 </body>
 </html>

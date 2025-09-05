@@ -21,54 +21,102 @@
   <form id="profileForm" class="bg-white p-4 rounded shadow-sm">
     <div class="mb-3">
       <label class="form-label">First Name</label>
-      <input type="text" class="form-control" value="Juan" readonly>
+      <input type="text" class="form-control" name="first_name" readonly>
     </div>
     <div class="mb-3">
       <label class="form-label">Last Name</label>
-      <input type="text" class="form-control" value="Dela Cruz" readonly>
+      <input type="text" class="form-control" name="last_name" readonly>
     </div>
     <div class="mb-3">
-      <label class="form-label">Number</label>
-      <input type="text" class="form-control" value="09123456789" readonly>
+      <label class="form-label">Email</label>
+      <input type="email" class="form-control" name="email" readonly>
     </div>
     <div class="mb-3">
-      <label class="form-label">Password</label>
-      <input type="password" class="form-control" value="mypassword" readonly>
+      <label class="form-label">Password (Leave blank to keep old)</label>
+      <input type="password" class="form-control" name="password" readonly>
     </div>
 
-    <!-- Buttons (hidden until Edit is clicked) -->
     <div id="actionBtns" class="d-none">
       <button type="submit" class="btn btn-success">Save</button>
       <button type="button" class="btn btn-secondary ms-2" id="cancelBtn">Cancel</button>
     </div>
   </form>
+
 </div>
 
 <script>
   const editBtn = document.getElementById('editBtn');
-  const inputs = document.querySelectorAll('#profileForm input');
   const actionBtns = document.getElementById('actionBtns');
   const cancelBtn = document.getElementById('cancelBtn');
-
-  // Store original values
+  const form = document.getElementById('profileForm');
+  const inputs = form.querySelectorAll('input');
   let originalValues = {};
 
+  // Load profile data from backend
+  fetch("get_profile.php")
+    .then(res => res.json())
+    .then(data => {
+      form.first_name.value = data.first_name;
+      form.last_name.value = data.last_name;
+      form.email.value = data.email;
+      form.password.value = ""; // Always empty for security
+    });
+
+  // Enable edit mode
   editBtn.addEventListener('click', () => {
-    inputs.forEach((input, index) => {
-      input.removeAttribute('readonly');
-      originalValues[index] = input.value;
+    inputs.forEach((input, i) => {
+      originalValues[i] = input.value;
+      if (input.name !== "password") {
+        input.removeAttribute('readonly');
+      } else {
+        input.removeAttribute('readonly');
+        input.placeholder = "Enter new password (optional)";
+      }
     });
     actionBtns.classList.remove('d-none');
     editBtn.classList.add('d-none');
   });
 
+  // Cancel edit
   cancelBtn.addEventListener('click', () => {
-    inputs.forEach((input, index) => {
-      input.value = originalValues[index];
+    inputs.forEach((input, i) => {
+      input.value = originalValues[i];
       input.setAttribute('readonly', true);
+      if (input.name === "password") {
+        input.value = "";
+        input.placeholder = "";
+      }
     });
     actionBtns.classList.add('d-none');
     editBtn.classList.remove('d-none');
+  });
+
+  // Save changes
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const formData = {
+      first_name: form.first_name.value,
+      last_name: form.last_name.value,
+      email: form.email.value
+    };
+    if (form.password.value.trim() !== "") {
+      formData.password = form.password.value;
+    }
+
+    fetch("update_profile.php", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(formData)
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        alert("Profile updated!");
+        location.reload();
+      } else {
+        alert("Error: " + data.error);
+      }
+    });
   });
 </script>
 

@@ -65,7 +65,7 @@
                             <div class="col-12 col-md-6 bg-white position-relative d-flex flex-column justify-content-center px-lg-5" style="min-height:400px;">
                                 <div class="p-4">
                                     <h4 class="fw-bold text-uppercase text-dark mb-4 text-center">REGISTER</h4>
-                                    <form method="POST" action="dashboard.html">
+                                    <form id="registerForm">
                                         <!-- First Name -->
                                         <div class="mb-3 position-relative">
                                             <input type="text" class="form-control border border-secondary rounded-2 ps-5" 
@@ -82,12 +82,12 @@
                                                 <i class="bi bi-person"></i>
                                             </span>
                                         </div>
-                                        <!-- Number -->
+                                        <!--Email -->
                                         <div class="mb-3 position-relative">
-                                            <input type="text" class="form-control border border-secondary rounded-2 ps-5" 
-                                                name="number" placeholder="Number" required>
+                                            <input type="email" class="form-control border border-secondary rounded-2 ps-5" 
+                                                name="email" placeholder="Email" required>
                                             <span class="position-absolute top-50 start-0 translate-middle-y ms-3 text-secondary">
-                                                <i class="bi bi-phone"></i>
+                                                <i class="bi bi-envelope"></i>
                                             </span>
                                         </div>
                                         <!-- Password -->
@@ -172,6 +172,30 @@
                 icon.classList.add('bi-eye');
             }
         }
+        document.getElementById("registerForm").addEventListener("submit", function(e) {
+
+            e.preventDefault(); // prevent normal form submit
+
+            let formData = new FormData(this);
+
+            fetch("register.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    alert(data.message);
+                    window.location = "login.html"; // redirect to login page
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                alert("Something went wrong. Try again!");
+                console.error(error);
+            });
+        });
     </script>
 </body>
 </html>
