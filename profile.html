@@ -31,11 +31,16 @@
       <label class="form-label">Email</label>
       <input type="email" class="form-control" name="email" readonly>
     </div>
-    <div class="mb-3">
-      <label class="form-label">Password (Leave blank to keep old)</label>
-      <input type="password" class="form-control" name="password" readonly>
-    </div>
+    <div id="passwordSection" class="mb-3 d-none">
+      <label class="form-label">Current Password</label>
+      <input type="password" class="form-control mb-2" name="current_password">
 
+      <label class="form-label">New Password</label>
+      <input type="password" class="form-control mb-2" name="new_password">
+
+      <label class="form-label">Confirm New Password</label>
+      <input type="password" class="form-control" name="confirm_password">
+    </div>
     <div id="actionBtns" class="d-none">
       <button type="submit" class="btn btn-success">Save</button>
       <button type="button" class="btn btn-secondary ms-2" id="cancelBtn">Cancel</button>
@@ -59,7 +64,7 @@
       form.first_name.value = data.first_name;
       form.last_name.value = data.last_name;
       form.email.value = data.email;
-      form.password.value = ""; // Always empty for security
+      form.password.value = "";
     });
 
   // Enable edit mode
@@ -68,11 +73,12 @@
       originalValues[i] = input.value;
       if (input.name !== "password") {
         input.removeAttribute('readonly');
-      } else {
-        input.removeAttribute('readonly');
-        input.placeholder = "Enter new password (optional)";
       }
     });
+
+    // Show password section when editing
+    document.getElementById('passwordSection').classList.remove('d-none');
+
     actionBtns.classList.remove('d-none');
     editBtn.classList.add('d-none');
   });
@@ -82,11 +88,14 @@
     inputs.forEach((input, i) => {
       input.value = originalValues[i];
       input.setAttribute('readonly', true);
-      if (input.name === "password") {
-        input.value = "";
-        input.placeholder = "";
-      }
     });
+
+    // Hide password section and clear fields
+    document.getElementById('passwordSection').classList.add('d-none');
+    form.current_password.value = "";
+    form.new_password.value = "";
+    form.confirm_password.value = "";
+
     actionBtns.classList.add('d-none');
     editBtn.classList.remove('d-none');
   });
@@ -94,13 +103,26 @@
   // Save changes
   form.addEventListener('submit', e => {
     e.preventDefault();
+
     const formData = {
       first_name: form.first_name.value,
       last_name: form.last_name.value,
       email: form.email.value
     };
-    if (form.password.value.trim() !== "") {
-      formData.password = form.password.value;
+
+    // If user filled password fields
+    if (form.current_password.value || form.new_password.value || form.confirm_password.value) {
+      if (!form.current_password.value || !form.new_password.value || !form.confirm_password.value) {
+        alert("Please fill in all password fields.");
+        return;
+      }
+      if (form.new_password.value !== form.confirm_password.value) {
+        alert("New password and confirm password do not match.");
+        return;
+      }
+
+      formData.current_password = form.current_password.value;
+      formData.new_password = form.new_password.value;
     }
 
     fetch("update_profile.php", {

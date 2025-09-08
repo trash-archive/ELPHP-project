@@ -284,52 +284,60 @@
                 alert('Failed to update note');
             }
         });
-      }
+    }
 
-
-      // Search functionality
+    // Search functionality
+    let searchTimeout;
     $('input[type="text"][placeholder="Search notes..."]').on('input', function() {
         const searchTerm = $(this).val().trim().toLowerCase();
-        
+
+        clearTimeout(searchTimeout);
+
         if (searchTerm === '') {
-            // If search is empty, load all notes
             loadNotes();
             return;
         }
 
-        $.ajax({
-            url: `dashboard.php?search=${encodeURIComponent(searchTerm)}`,
-            type: 'GET',
-            success: function(response) {
-                if (response.success) {
-                    const notesList = $('.list-group');
-                    notesList.empty();
-                    
-                    if (response.notes.length === 0) {
-                        alert('No notes found matching your search.');
-                        return;
-                    }
-                    
-                    response.notes.forEach(note => {
-                        const date = new Date(note.updated_at || note.created_at);
-                        notesList.append(`
-                            <button class="list-group-item list-group-item-action" onclick="openNote(${note.id})">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h6 class="mb-1">${note.title}</h6>
+        searchTimeout = setTimeout(() => {
+            $.ajax({
+                url: `dashboard.php?search=${encodeURIComponent(searchTerm)}`,
+                type: 'GET',
+                success: function(response) {
+                    if (response.success) {
+                        const notesList = $('.list-group');
+                        notesList.empty();
+
+                        if (response.notes.length === 0) {
+                            // Show a friendly inline message instead of alert
+                            notesList.append(`
+                                <div class="list-group-item text-center text-muted">
+                                    No notes found matching "${searchTerm}"
                                 </div>
-                                <p class="mb-1 text-truncate text-secondary">${note.content}</p>
-                                <small class="d-flex justify-content-end text-secondary">
-                                    ${date.toLocaleDateString()}
-                                </small>
-                            </button>
-                        `);
-                    });
+                            `);
+                            return;
+                        }
+
+                        response.notes.forEach(note => {
+                            const date = new Date(note.updated_at || note.created_at);
+                            notesList.append(`
+                                <button class="list-group-item list-group-item-action" onclick="openNote(${note.id})">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">${note.title}</h6>
+                                    </div>
+                                    <p class="mb-1 text-truncate text-secondary">${note.content}</p>
+                                    <small class="d-flex justify-content-end text-secondary">
+                                        ${date.toLocaleDateString()}
+                                    </small>
+                                </button>
+                            `);
+                        });
+                    }
+                },
+                error: function() {
+                    alert('Failed to search notes');
                 }
-            },
-            error: function() {
-                alert('Failed to search notes');
-            }
-        });
+            });
+        }, 500);
     });
 
     // Initialize

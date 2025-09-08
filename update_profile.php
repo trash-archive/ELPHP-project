@@ -22,15 +22,34 @@ $data = json_decode(file_get_contents("php://input"), true);
 $user_id = $_SESSION['user_id'];
 
 $firstName = $data['first_name'];
-$lastName = $data['last_name'];
-$email = $data['email'];
+$lastName  = $data['last_name'];
+$email     = $data['email'];
 
-// Optional: password update
-if (!empty($data['password'])) {
-    $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
+// If password change is requested
+if (!empty($data['current_password']) && !empty($data['new_password'])) {
+    // Fetch current password from DB
+    $stmt = $conn->prepare("SELECT password FROM users WHERE id=?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $stmt->bind_result($hashedPasswordFromDB);
+    $stmt->fetch();
+    $stmt->close();
+
+    // Verify current password
+    if (!password_verify($data['current_password'], $hashedPasswordFromDB)) {
+        echo json_encode(["success" => false, "error" => "Current password is incorrect"]);
+        $conn->close();
+        exit;
+    }
+
+    // Hash new password
+    $newHashedPassword = password_hash($data['new_password'], PASSWORD_DEFAULT);
+
+    // Update profile with new password
     $stmt = $conn->prepare("UPDATE users SET first_name=?, last_name=?, email=?, password=? WHERE id=?");
-    $stmt->bind_param("ssssi", $firstName, $lastName, $email, $hashedPassword, $user_id);
+    $stmt->bind_param("ssssi", $firstName, $lastName, $email, $newHashedPassword, $user_id);
 } else {
+    // Update profile without changing password
     $stmt = $conn->prepare("UPDATE users SET first_name=?, last_name=?, email=? WHERE id=?");
     $stmt->bind_param("sssi", $firstName, $lastName, $email, $user_id);
 }
@@ -40,6 +59,7 @@ if ($stmt->execute()) {
 } else {
     echo json_encode(["success" => false, "error" => $stmt->error]);
 }
+
 $stmt->close();
 $conn->close();
 ?>
