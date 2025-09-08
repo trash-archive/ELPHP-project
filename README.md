@@ -121,6 +121,59 @@ Using XAMPP (Recommended for Windows)
 ![Profile Page](assets/images/screenshot_profile.png)
 
 ---
+## Database structure
+Instructions: This table below is the exact database structure in my phpmyadmin, enable for you to use this application you need to copy this database okay? okayyyy
+-- Users table
+CREATE TABLE users (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY (email)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Notes table
+CREATE TABLE notes (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    user_id INT(11) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT NULL,
+    PRIMARY KEY (id),
+    KEY (user_id),
+    CONSTRAINT fk_notes_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- OTP Codes table
+CREATE TABLE otp_codes (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    user_id INT(11) NOT NULL,
+    otp VARCHAR(10) NOT NULL,
+    expires_at DATETIME NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    KEY (user_id),
+    CONSTRAINT fk_otp_codes_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- OTP Verification table
+CREATE TABLE otp_verification (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    otp_id INT(11) NOT NULL,
+    ip_address VARCHAR(50) NOT NULL,
+    user_agent VARCHAR(255) NOT NULL,
+    status ENUM('success','failed') NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    KEY (otp_id),
+    CONSTRAINT fk_otp_verification_code FOREIGN KEY (otp_id) REFERENCES otp_codes(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+---
 
 ## Notes
 
