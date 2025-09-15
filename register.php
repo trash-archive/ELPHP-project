@@ -4,8 +4,8 @@ header('Content-Type: application/json');
 // Database connection
 $servername = "localhost";
 $username = "root";
-$password = ""; 
-$dbname = "mynotesdb"; 
+$password = "";
+$dbname = "mynotesdb";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -49,8 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Hash password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    // Insert user
-    $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)");
+    // Insert user with role 'user'
+    $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, password, role) VALUES (?, ?, ?, ?, 'user')");
     $stmt->bind_param("ssss", $firstName, $lastName, $email, $hashedPassword);
 
     if ($stmt->execute()) {
