@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4Notes App - User Details</title>
+    <link rel="stylesheet" href="css/UserDetails.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Mobile Toggle Button -->
+    <button class="mobile-toggle" id="mobileToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div class="sidebar bg-dark" id="sidebar">
+        <div>
+            <div class="p-4">
+                <h4 class="brand-title mb-0">
+                    <i class="fa-solid fa-book-open"></i> 4Notes Admin
+                </h4>
+            </div>
+            <nav class="nav flex-column">
+                <a class="nav-link" href="Usermanagement.html">
+                    <i class="fas fa-users"></i>User Management
+                </a>
+            </nav>
+        </div>
+        <div class="sidebar-footer p-3 border-top border-secondary">
+            <div class="dropdown">
+                <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" href="#"
+                    id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-circle me-2"></i>Admin User
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="content-wrapper">
+            <!-- Back Button -->
+            <div class="mb-3">
+                <a href="Usermanagement.html" class="btn btn-light">
+                    <i class="fas fa-arrow-left me-2"></i>Back to User Lists
+                </a>
+            </div>
+
+            <!-- User Information -->
+            <div class="user-info-card">
+                <div class="row">
+                    <div class="col-md-2 text-center">
+                        <div class="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <h3 class="mb-2">John Doe</h3>
+                        <p class="text-muted mb-1"><i class="fas fa-envelope me-2"></i>john.doe@email.com</p>
+                        <p class="text-muted mb-0"><i class="fas fa-calendar me-2"></i>Joined: January 15, 2024</p>
+                    </div>
+                    <div class="col-md-3 text-end">
+                        <button class="btn btn-danger mt-2">
+                            <i class="fas fa-trash me-2"></i>Delete User
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Notes -->
+            <div class="mb-3">
+                <h4 class="mb-0"><i class="fa-solid fa-rectangle-list"></i> User Notes (3)</h4>
+            </div>
+
+            <div class="note-card">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="note-title">Meeting Notes</div>
+        <button class="btn btn-sm btn-light toggle-btn">
+            <i class="fas fa-chevron-down"></i>
+        </button>
+    </div>
+    <div class="note-body collapse">
+        Discussed project timeline and deliverables. Need to follow up with the development team by Friday.
+    </div>
+    <div class="note-meta collapse">
+        <i class="fas fa-calendar-alt me-2"></i>Created: January 20, 2024
+    </div>
+</div>
+
+<div class="note-card">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="note-title">Shopping List</div>
+        <button class="btn btn-sm btn-light toggle-btn">
+            <i class="fas fa-chevron-down"></i>
+        </button>
+    </div>
+    <div class="note-body collapse">
+        Milk, eggs, bread, chicken, vegetables, fruits. Don’t forget to check if there are any discounts.
+    </div>
+    <div class="note-meta collapse">
+        <i class="fas fa-calendar-alt me-2"></i>Created: January 19, 2024
+    </div>
+</div>
+
+<div class="note-card">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="note-title">Book Ideas</div>
+        <button class="btn btn-sm btn-light toggle-btn">
+            <i class="fas fa-chevron-down"></i>
+        </button>
+    </div>
+    <div class="note-body collapse">
+        1. The Art of Problem Solving<br>
+        2. Digital Transformation in Modern Business<br>
+        3. Mindfulness in Daily Life
+    </div>
+    <div class="note-meta collapse">
+        <i class="fas fa-calendar-alt me-2"></i>Created: January 18, 2024
+    </div>
+</div>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="Js/UserDetails.js"></script>
+</body>
+</html>
