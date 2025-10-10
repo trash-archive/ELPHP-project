@@ -179,6 +179,7 @@ Hashed Password admin
 INSERT INTO users (first_name, last_name, email, password, role)
 VALUES ('Mark', 'Jhon', 'adminmark@gmail.com', 'run the genhashed.html', 'admin');
 
+ALTER TABLE notes ADD COLUMN is_archived TINYINT(1) DEFAULT 0;
 ---
 
 ## Notes

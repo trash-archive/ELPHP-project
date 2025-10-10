@@ -8,14 +8,105 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    /* Ensure full height on all devices */
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    /* Sidebar styling */
+    #sidebar {
+      height: 100vh;
+      overflow-y: auto;
+      transition: transform 0.3s ease-in-out;
+    }
+    
+    /* Main content area */
+    #main-content {
+      height: 100vh;
+      overflow-y: auto;
+    }
+    
+    /* Mobile sidebar overlay */
+    @media (max-width: 767.98px) {
+      #sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 280px;
+        z-index: 1050;
+        transform: translateX(-100%);
+        box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      }
+      
+      #sidebar.show {
+        transform: translateX(0);
+      }
+      
+      .sidebar-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 1040;
+        display: none;
+      }
+      
+      .sidebar-backdrop.show {
+        display: block;
+      }
+      
+      #main-content {
+        width: 100%;
+        margin-left: 0;
+      }
+    }
+    
+    /* Desktop layout */
+    @media (min-width: 768px) {
+      #sidebar {
+        position: relative;
+        transform: translateX(0) !important;
+      }
+    }
+    
+    /* Note content area */
+    .note-content {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    
+    /* List group items */
+    .list-group-item {
+      cursor: pointer;
+    }
+    
+    /* Textarea responsive */
+    textarea.form-control {
+      resize: vertical;
+      min-height: 200px;
+    }
+    
+    @media (max-width: 767.98px) {
+      textarea.form-control {
+        min-height: 150px;
+      }
+    }
+  </style>
 </head>
 <body class="bg-light">
 
-  <div class="container-fluid vh-100">
-    <div class="row h-100 flex-md-row flex-column">
+  <!-- Sidebar Backdrop (Mobile only) -->
+  <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="toggleSidebar()"></div>
+
+  <div class="container-fluid h-100">
+    <div class="row h-100">
 
       <!-- Sidebar -->
-      <div id="sidebar" class="col-md-3 col-12 border-end bg-white d-flex flex-column p-3 collapse show">
+      <div id="sidebar" class="col-md-3 border-end bg-white d-flex flex-column p-3">
 
         <!-- Header -->
         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -23,15 +114,19 @@
             <i class="bi bi-book me-2"></i>
             <h5 class="fw-bold fs-4 mb-0">FourNotes</h5>
           </div>
-            <!-- Profile Dropdown -->
-          <div class="dropdown">
+          <!-- Close button (Mobile only) -->
+          <button class="btn btn-sm btn-light d-md-none" onclick="toggleSidebar()">
+            <i class="bi bi-x-lg"></i>
+          </button>
+          <!-- Profile Dropdown (Desktop only) -->
+          <div class="dropdown d-none d-md-block">
             <a href="#" class="text-dark" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-person fs-5"></i>
+              <i class="bi bi-person fs-5"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-            <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item text-danger" href="index.html">Logout</a></li>
+              <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" href="index.html">Logout</a></li>
             </ul>
           </div>
         </div>
@@ -39,18 +134,21 @@
         <!-- Search -->
         <div class="mb-3 position-relative">
           <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
-          <input type="text" class="form-control ps-5" placeholder="Search notes...">
+          <input type="text" id="searchInput" class="form-control ps-5" placeholder="Search notes...">
         </div>
 
-        <!-- New Note Button -->
-        <div class="d-grid mb-3">
-          <button class="btn btn-primary w-100" onclick="showCreateNote()">
-            <i class="bi bi-plus"></i> New Note
+        <!-- Notes and Archive buttons -->
+        <div class="d-flex gap-2 mb-3">
+          <button class="btn btn-primary flex-fill" onclick="showActiveNotes()">
+            <i class="bi bi-journal-text"></i> <span class="d-none d-sm-inline">Notes</span>
+          </button>
+          <button class="btn btn-outline-secondary flex-fill" onclick="showArchive()">
+            <i class="bi bi-archive"></i> <span class="d-none d-sm-inline">Archive</span>
           </button>
         </div>
 
         <!-- Notes List -->
-        <div class="list-group">
+        <div class="list-group flex-grow-1 overflow-auto" id="notesList">
           <button class="list-group-item list-group-item-action" onclick="openNote()">
             <div class="d-flex w-100 justify-content-between">
               <h6 class="mb-1">Welcome to Your Notes</h6>
@@ -59,67 +157,497 @@
             <small class="d-flex justify-content-end text-secondary">Aug 18, 2025</small>
           </button>
         </div>
+
+        <!-- Profile section (Mobile only) -->
+        <div class="d-md-none mt-3 pt-3 border-top">
+          <div class="d-flex justify-content-between">
+            <a href="profile.html" class="btn btn-outline-secondary flex-fill me-2">
+              <i class="bi bi-person"></i> Profile
+            </a>
+            <a href="index.html" class="btn btn-outline-danger flex-fill">
+              <i class="bi bi-box-arrow-right"></i> Logout
+            </a>
+          </div>
+        </div>
       </div>
 
       <!-- Main Content -->
-      <div id="main-content" class="col bg-white p-4">
+      <div id="main-content" class="col-md-9 bg-white p-3 p-md-4">
 
-        <!-- Mobile toggle button -->
-        <div class="d-md-none mb-3">
-          <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar">
+        <!-- Mobile Header -->
+        <div class="d-md-none mb-3 d-flex justify-content-between align-items-center">
+          <button class="btn btn-outline-primary" onclick="toggleSidebar()">
             <i class="bi bi-list"></i> Menu
           </button>
         </div>
 
-        <!-- Empty State (centered only when visible) -->
-        <div id="empty-state" class="h-100 d-flex flex-column justify-content-center align-items-center text-center">
-          <i class="bi bi-book fs-1 text-muted mb-2"></i>
+        <!-- Empty State -->
+        <div id="empty-state" class="h-100 d-flex flex-column justify-content-center align-items-center text-center px-3">
+          <i class="bi bi-book fs-1 text-muted mb-3"></i>
           <h5 class="fw-semibold">No Note Selected</h5>
           <p class="text-muted">Choose a note from the sidebar or create a new one</p>
-          <button class="btn btn-primary" onclick="showCreateNote()">
-            <i class="bi bi-plus"></i> Create Your First Note
+          <button class="btn btn-primary mt-2" onclick="showCreateNote()">
+            <i class="bi bi-plus"></i> Create Note
           </button>
         </div>
 
-        <!-- Create Note Form (hidden initially, aligned to top) -->
-        <div id="create-note" class="w-100 d-none p-4">
-            <h2 class="fw-bold mb-3">Create a New Note</h2>
-            <p class="text-muted mb-4">Write down your thoughts, ideas, or important information.</p>
-            <input type="text" class="form-control mb-3" placeholder="Note title...">
-            <textarea class="form-control mb-3" rows="6" placeholder="Start writing..."></textarea>
-            <div class="d-flex gap-2">
-                <button class="btn btn-primary" onclick="createNote()">Save Note</button>
-                <button class="btn btn-outline-secondary" onclick="showEmptyState()">Cancel</button>
-            </div>
-        </div>
-
-        <!-- Note Viewer (hidden initially, aligned to top) -->
-        <div id="note-viewer" class="w-100 d-none p-4">
-          <div class="d-flex justify-content-between align-items-start mb-2">
-              <h4 class="fw-bold" contenteditable="false">Welcome to Your Notes</h4>
-              <div class="d-flex gap-2">
-                  <button class="btn btn-light" onclick="toggleEdit(this)">
-                      <i class="bi bi-pencil"></i>
-                  </button>
-                  <button class="btn btn-light" onclick="deleteCurrentNote()">
-                      <i class="bi bi-trash"></i>
-                  </button>
-              </div>
+        <!-- Create/Edit Note Form -->
+        <div id="create-note" class="w-100 d-none">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="fw-bold mb-0">Create a New Note</h2>
+            <button class="btn btn-light d-md-none" onclick="showEmptyState()">
+              <i class="bi bi-x-lg"></i>
+            </button>
           </div>
-          <p class="text-muted"><i class="bi bi-calendar"></i> Aug 18, 2025, 10:30 AM</p>
-          <hr class="mb-3">
-          <p class="note-content"></p>
+          <p class="text-muted mb-4">Write down your thoughts, ideas, or important information.</p>
+          <div class="mb-3">
+            <input type="text" class="form-control" id="noteTitle" placeholder="Note title...">
+          </div>
+          <div class="mb-3">
+            <textarea class="form-control" id="noteContent" rows="8" placeholder="Start writing..."></textarea>
+          </div>
+          <div class="d-flex flex-column flex-sm-row gap-2">
+            <button class="btn btn-primary" onclick="createNote()">
+              <i class="bi bi-save"></i> Save Note
+            </button>
+            <button class="btn btn-outline-secondary" onclick="showEmptyState()">
+              <i class="bi bi-x"></i> Cancel
+            </button>
+          </div>
         </div>
 
+        <!-- Note Viewer -->
+        <div id="note-viewer" class="w-100 d-none">
+          <div class="d-flex justify-content-between align-items-start mb-3 flex-wrap gap-2">
+            <h4 class="fw-bold mb-0" id="noteViewerTitle">Welcome to Your Notes</h4>
+            <div class="d-flex gap-2">
+              <button class="btn btn-light btn-sm" onclick="backToDashboard()" title="Back">
+                <i class="bi bi-arrow-left"></i>
+              </button>
+              <button class="btn btn-light btn-sm" onclick="toggleEdit(this)" title="Edit">
+                <i class="bi bi-pencil"></i>
+              </button>
+              <button class="btn btn-light btn-sm" onclick="deleteCurrentNote()" title="Archive">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </div>
+          <p class="text-muted" id="note-date">
+            <i class="bi bi-calendar"></i>
+          </p>
+          <hr class="mb-3">
+          <p class="note-content" id="noteViewerContent"></p>
+        </div>
       </div>
-
     </div>
   </div>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="Js/userDashboard.js"></script>
+  <script>
+    let isArchiveMode = false;
+
+    // Toggle sidebar for mobile
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const backdrop = document.getElementById('sidebarBackdrop');
+      sidebar.classList.toggle('show');
+      backdrop.classList.toggle('show');
+    }
+
+    // UI State Management
+    function showCreateNote() {
+      $('#empty-state').addClass('d-none');
+      $('#note-viewer').addClass('d-none');
+      $('#create-note').removeClass('d-none');
+      
+      // Close sidebar on mobile after selecting
+      if (window.innerWidth < 768) {
+        toggleSidebar();
+      }
+    }
+
+    function showEmptyState() {
+      $('#empty-state').removeClass('d-none');
+      $('#note-viewer').addClass('d-none');
+      $('#create-note').addClass('d-none');
+      
+      // Reset form
+      $('#create-note h2').text('Create a New Note');
+      $('#create-note p.text-muted').text('Write down your thoughts, ideas, or important information.');
+      $('#noteTitle, #noteContent').val('');
+      $('#create-note button.btn-primary')
+        .html('<i class="bi bi-save"></i> Save Note')
+        .attr('onclick', 'createNote()');
+    }
+
+    function showNoteViewer() {
+      $('#empty-state').addClass('d-none');
+      $('#create-note').addClass('d-none');
+      $('#note-viewer').removeClass('d-none');
+      
+      // Close sidebar on mobile after selecting
+      if (window.innerWidth < 768) {
+        const sidebar = document.getElementById('sidebar');
+        const backdrop = document.getElementById('sidebarBackdrop');
+        if (sidebar.classList.contains('show')) {
+          toggleSidebar();
+        }
+      }
+    }
+
+    function backToDashboard() {
+      showEmptyState();
+    }
+
+    // Load all notes
+    function loadNotes() {
+      $.get('dashboard.php', function(response) {
+        if (response.success) {
+          const notesList = $('#notesList');
+          notesList.empty();
+          
+          if (response.notes.length === 0) {
+            notesList.append(`
+              <div class="list-group-item text-center text-muted">
+                No notes found. Create your first note!
+              </div>
+            `);
+            return;
+          }
+          
+          response.notes.forEach(note => {
+            const date = new Date(note.updated_at || note.created_at);
+            notesList.append(`
+              <button class="list-group-item list-group-item-action" onclick="openNote(${note.id})">
+                <div class="d-flex w-100 justify-content-between">
+                  <h6 class="mb-1 text-truncate">${escapeHtml(note.title)}</h6>
+                </div>
+                <p class="mb-1 text-truncate text-secondary">${escapeHtml(note.content)}</p>
+                <small class="d-flex justify-content-end text-secondary">
+                  ${date.toLocaleDateString()}
+                </small>
+              </button>
+            `);
+          });
+        }
+      });
+    }
+
+    // Show active notes
+    function showActiveNotes() {
+      isArchiveMode = false;
+      $.get('dashboard.php', function(response) {
+        if (response.success) {
+          const notesList = $('#notesList');
+          notesList.empty();
+
+          if (response.notes.length === 0) {
+            notesList.append(`
+              <div class="list-group-item text-center text-muted">
+                No active notes found.
+              </div>
+            `);
+            return;
+          }
+
+          response.notes.forEach(note => {
+            const date = new Date(note.updated_at || note.created_at);
+            notesList.append(`
+              <button class="list-group-item list-group-item-action" onclick="openNote(${note.id})">
+                <div class="d-flex w-100 justify-content-between">
+                  <h6 class="mb-1 text-truncate">${escapeHtml(note.title)}</h6>
+                </div>
+                <p class="mb-1 text-truncate text-secondary">${escapeHtml(note.content)}</p>
+                <small class="d-flex justify-content-end text-secondary">
+                  ${date.toLocaleDateString()}
+                </small>
+              </button>
+            `);
+          });
+        }
+      });
+    }
+
+    // Show archive
+    function showArchive() {
+      isArchiveMode = true;
+      $.get('dashboard.php?archived=1', function(response) {
+        if (response.success) {
+          const notesList = $('#notesList');
+          notesList.empty();
+
+          if (response.notes.length === 0) {
+            notesList.append(`
+              <div class="list-group-item text-center text-muted">
+                No archived notes found.
+              </div>
+            `);
+            return;
+          }
+
+          response.notes.forEach(note => {
+            const date = new Date(note.updated_at || note.created_at);
+            notesList.append(`
+              <div class="list-group-item">
+                <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                  <div class="flex-grow-1">
+                    <h6 class="mb-1">${escapeHtml(note.title)}</h6>
+                    <p class="mb-1 text-truncate text-secondary">${escapeHtml(note.content)}</p>
+                    <small class="text-secondary">${date.toLocaleDateString()}</small>
+                  </div>
+                  <button class="btn btn-sm btn-outline-success" onclick="restoreNote(${note.id})">
+                    <i class="bi bi-arrow-counterclockwise"></i> <span class="d-none d-sm-inline">Restore</span>
+                  </button>
+                </div>
+              </div>
+            `);
+          });
+        }
+      });
+    }
+
+    // Restore note
+    function restoreNote(noteId) {
+      $.ajax({
+        url: 'dashboard.php',
+        type: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify({ id: noteId, restore: true }),
+        success: function(response) {
+          if (response.success) {
+            alert('Note restored successfully!');
+            showArchive();
+          } else {
+            alert(response.message || 'Failed to restore note');
+          }
+        },
+        error: function() {
+          alert('Error restoring note');
+        }
+      });
+    }
+
+    // Create note
+    function createNote() {
+      const title = $('#noteTitle').val().trim();
+      const content = $('#noteContent').val().trim();
+      
+      if (!title || !content) {
+        alert('Please enter both title and content');
+        return;
+      }
+      
+      $.ajax({
+        url: 'dashboard.php',
+        type: 'POST',
+        data: JSON.stringify({ title, content }),
+        contentType: 'application/json',
+        success: function(response) {
+          if (response.success) {
+            loadNotes();
+            showEmptyState();
+          } else {
+            alert(response.message || 'Failed to create note');
+          }
+        },
+        error: function() {
+          alert('Failed to create note');
+        }
+      });
+    }
+
+    // Open note
+    function openNote(noteId) {
+      $.get(`dashboard.php?id=${noteId}`, function(response) {
+        if (response.success && response.notes[0]) {
+          const note = response.notes[0];
+          const date = new Date(note.created_at);
+
+          $('#noteViewerTitle').text(note.title);
+          $('#noteViewerContent').text(note.content);
+          $('#note-date').html(`<i class="bi bi-calendar"></i> ${date.toLocaleString()}`);
+          $('#note-viewer').attr('data-note-id', note.id);
+
+          showNoteViewer();
+        }
+      });
+    }
+
+    // Toggle edit
+    function toggleEdit(button) {
+      const noteViewer = $('#note-viewer');
+      const noteId = noteViewer.attr('data-note-id');
+      const currentTitle = $('#noteViewerTitle').text().trim();
+      const currentContent = $('#noteViewerContent').text().trim();
+
+      $('#create-note h2').text('Update Note');
+      $('#create-note p.text-muted').text('Edit your note below.');
+      $('#noteTitle').val(currentTitle);
+      $('#noteContent').val(currentContent);
+      $('#create-note button.btn-primary')
+        .html('<i class="bi bi-save"></i> Update Note')
+        .attr('onclick', `updateNote(${noteId})`);
+      
+      showCreateNote();
+    }
+
+    // Update note
+    function updateNote(noteId) {
+      const title = $('#noteTitle').val().trim();
+      const content = $('#noteContent').val().trim();
+      
+      if (!title || !content) {
+        alert('Title and content cannot be empty');
+        return;
+      }
+      
+      $.ajax({
+        url: 'dashboard.php',
+        type: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify({ id: noteId, title, content }),
+        success: function(response) {
+          if (response.success) {
+            loadNotes();
+            showEmptyState();
+          } else {
+            alert(response.message || 'Failed to update note');
+          }
+        },
+        error: function() {
+          alert('Failed to update note');
+        }
+      });
+    }
+
+    // Delete note
+    function deleteCurrentNote() {
+      const noteId = $('#note-viewer').attr('data-note-id');
+      if (noteId && confirm('Move this note to archive?')) {
+        $.ajax({
+          url: `dashboard.php?id=${noteId}`,
+          type: 'DELETE',
+          success: function(response) {
+            if (response.success) {
+              loadNotes();
+              showEmptyState();
+            } else {
+              alert(response.message || 'Failed to archive note');
+            }
+          },
+          error: function() {
+            alert('Failed to archive note');
+          }
+        });
+      }
+    }
+
+    // Search functionality
+    let searchTimeout;
+    $('#searchInput').on('input', function() {
+      const searchTerm = $(this).val().trim().toLowerCase();
+
+      clearTimeout(searchTimeout);
+
+      if (searchTerm === '') {
+        if (isArchiveMode) {
+          showArchive();
+        } else {
+          loadNotes();
+        }
+        return;
+      }
+
+      searchTimeout = setTimeout(() => {
+        $.ajax({
+          url: `dashboard.php?search=${encodeURIComponent(searchTerm)}&archived=${isArchiveMode ? 1 : 0}`,
+          type: 'GET',
+          success: function(response) {
+            if (response.success) {
+              const notesList = $('#notesList');
+              notesList.empty();
+
+              if (response.notes.length === 0) {
+                notesList.append(`
+                  <div class="list-group-item text-center text-muted">
+                    No notes found matching "${escapeHtml(searchTerm)}"
+                  </div>
+                `);
+                return;
+              }
+
+              response.notes.forEach(note => {
+                const date = new Date(note.updated_at || note.created_at);
+                if (isArchiveMode) {
+                  notesList.append(`
+                    <div class="list-group-item">
+                      <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                        <div class="flex-grow-1">
+                          <h6 class="mb-1">${escapeHtml(note.title)}</h6>
+                          <p class="mb-1 text-truncate text-secondary">${escapeHtml(note.content)}</p>
+                          <small class="text-secondary">${date.toLocaleDateString()}</small>
+                        </div>
+                        <button class="btn btn-sm btn-outline-success" onclick="restoreNote(${note.id})">
+                          <i class="bi bi-arrow-counterclockwise"></i> <span class="d-none d-sm-inline">Restore</span>
+                        </button>
+                      </div>
+                    </div>
+                  `);
+                } else {
+                  notesList.append(`
+                    <button class="list-group-item list-group-item-action" onclick="openNote(${note.id})">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1 text-truncate">${escapeHtml(note.title)}</h6>
+                      </div>
+                      <p class="mb-1 text-truncate text-secondary">${escapeHtml(note.content)}</p>
+                      <small class="d-flex justify-content-end text-secondary">
+                        ${date.toLocaleDateString()}
+                      </small>
+                    </button>
+                  `);
+                }
+              });
+            }
+          },
+          error: function() {
+            alert('Failed to search notes');
+          }
+        });
+      }, 500);
+    });
+
+    // Utility function to escape HTML
+    function escapeHtml(text) {
+      const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      };
+      return text.replace(/[&<>"']/g, m => map[m]);
+    }
+
+    // Close sidebar when clicking outside on mobile
+    document.addEventListener('click', function(event) {
+      if (window.innerWidth < 768) {
+        const sidebar = document.getElementById('sidebar');
+        const backdrop = document.getElementById('sidebarBackdrop');
+        
+        if (sidebar.classList.contains('show') && 
+            !sidebar.contains(event.target) && 
+            !event.target.matches('[onclick*="toggleSidebar"]')) {
+          toggleSidebar();
+        }
+      }
+    });
+
+    // Initialize
+    $(document).ready(function() {
+      loadNotes();
+    });
+  </script>
 </body>
 </html>
