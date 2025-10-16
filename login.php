@@ -1,18 +1,9 @@
 <?php
 session_start();
+header('Content-Type: application/json; charset=utf-8');
 
-// Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "mynotesdb";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die(json_encode(["status" => "error", "message" => "Connection failed"]));
-}
+// Include database connection
+require_once 'db_connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);

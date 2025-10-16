@@ -8,17 +8,8 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "mynotesdb";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    http_response_code(500);
-    echo json_encode(["error" => "Database connection failed"]);
-    exit;
-}
+// Include database connection
+require_once 'db_connect.php';
 
 $user_id = $_SESSION['user_id'];
 $stmt = $conn->prepare("SELECT first_name, last_name, email FROM users WHERE id = ?");

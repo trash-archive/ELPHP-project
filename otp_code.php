@@ -1,8 +1,9 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-$conn = new mysqli("localhost","root","","mynotesdb");
-if($conn->connect_error){ echo json_encode(["success"=>false,"message"=>"DB failed"]); exit; }
+
+// Include database connection
+require_once 'db_connect.php';
 
 if($_SERVER["REQUEST_METHOD"]==="POST"){
     $email = trim($_POST['email']);

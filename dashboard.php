@@ -8,12 +8,8 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-// Database connection
-$conn = new mysqli("localhost", "root", "", "mynotesdb");
-if ($conn->connect_error) {
-    echo json_encode(["success" => false, "message" => "Database connection failed"]);
-    exit;
-}
+// Include database connection
+require_once 'db_connect.php';
 
 $user_id = $_SESSION['user_id'];
 $method = $_SERVER['REQUEST_METHOD'];

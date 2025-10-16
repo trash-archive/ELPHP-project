@@ -1,18 +1,8 @@
 <?php
 header('Content-Type: application/json');
 
-// Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "mynotesdb";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die(json_encode(["error" => "Connection failed: " . $conn->connect_error]));
-}
+// Include database connection
+require_once 'db_connect.php';
 
 // Get search and pagination parameters
 $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
