@@ -3,89 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4Notes - Your Digital Note Taking Solution</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <title>4notes - Note Taking Reimagined</title>
+    <link rel="stylesheet" href="css/landing_page.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg py-3 bg-white shadow-sm fixed-top">
+    <div class="ambient-shape shape-1"></div>
+    <div class="ambient-shape shape-2"></div>
+
+    <nav class="navbar">
         <div class="container">
-            <!-- Brand -->
-            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-                <span class="d-flex align-items-center justify-content-center" style="width:45px; height:45px;">
-                    <img src="assets/images/logo.png" alt="4Notes Logo" style="width: 120px; height: 120px; object-fit: contain;">
-                </span>
-                <div class="d-flex flex-column">
-                    <span class="text-primary" style="font-size: 0.75rem; letter-spacing: 2px;">NOTE TAKING SOLUTION</span>
-                </div>
-            </a>
-
-            <!-- Mobile Toggle Button -->
-            <button class="navbar-toggler border-0 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Navigation Links -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item mx-2">
-                        <a class="nav-link active fw-medium" href="#">Home</a>
-                    </li>
-                    <li class="nav-item mx-2">
-                        <a class="nav-link fw-medium" href="register.html">Register</a>
-                    </li>
-                    <li class="nav-item ms-2 p-2">
-                        <a class="btn btn-primary px-4 rounded-pill" href="login.html">Login</a>
-                    </li>
+            <div class="navbar-content">
+                <a class="navbar-brand" href="#">4notes</a>
+                <ul class="nav-links">
+                    <li><a class="nav-link" href="#features">Features</a></li>
+                    <li><a class="nav-link" href="register.html">Register</a></li>
+                    <li><a class="nav-link" href="login.html">Sign In</a></li>
                 </ul>
+                <button class="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="min-vh-100 d-flex align-items-center py-2 pt-5" style="background: linear-gradient(180deg, #0a2342 0%, #19324d 100%);">
-        <div class="container mt-5">
-            <div class="row align-items-center">
-                <div class="col-lg-6 text-white">
-                    <h1 class="display-4 fw-bold mb-4">Capture Your Thoughts, Organize Your Life</h1>
-                    <p class="lead mb-4">4Notes helps you keep your ideas organized and accessible anywhere. Start taking better notes today!</p>
-                    <a href="register.html" class="btn btn-primary btn-lg rounded-3 px-4 mb-5">Get Started</a>
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1>Think clearly, <span class="highlight">write freely</span></h1>
+                    <p>A minimal space for your thoughts. No clutter, no distractions. Just you and your ideas flowing naturally.</p>
+                    <div class="cta-buttons">
+                        <button class="btn-primary-custom" onclick="window.location.href='login.html'">Start Writing</button>
+                        <button class="btn-secondary-custom" onclick="window.location.href='#features'">Explore</button>
+                    </div>
                 </div>
-                <div class="col-lg-6">
-                    <div id="carouselPicture" class="carousel slide shadow-lg rounded-4 overflow-hidden" data-bs-touch="false" data-bs-interval="false">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="assets/images/mark.jpg" class="d-block w-100 img-fluid" alt="mark" style="height: 400px; object-fit: cover;">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="assets/images/hasim.jpg" class="d-block w-100 img-fluid" alt="hasim" style="height: 400px; object-fit: cover;">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="assets/images/yopacs.jpg" class="d-block w-100 img-fluid" alt="yopacs" style="height: 400px; object-fit: cover;">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="assets/images/luis.jpg" class="d-block w-100 img-fluid" alt="luis" style="height: 400px; object-fit: cover;">
-                            </div>
+                
+                <div class="visual-section">
+                    <div class="note-canvas canvas-1">
+                        <div class="note-header"><span class="note-dot dot-orange"></span>Ideas</div>
+                        <div class="note-title">Weekend Project</div>
+                        <div class="note-text">Build something meaningful. Small steps lead to big changes.</div>
+                        <div class="note-line"></div>
+                        <div class="note-text" style="font-size: 0.8rem; opacity: 0.6;">2 hours ago</div>
+                    </div>
+
+                    <div class="note-canvas canvas-2">
+                        <div class="note-header"><span class="note-dot dot-blue"></span>Work</div>
+                        <div class="note-title">Team Sync</div>
+                        <div class="note-text">Review design mockups<br>Discuss API architecture<br>Plan sprint goals</div>
+                    </div>
+
+                    <div class="note-canvas canvas-3">
+                        <div class="note-header"><span class="note-dot dot-green"></span>Personal</div>
+                        <div class="note-title">Morning Thoughts</div>
+                        <div class="note-text">The quietest moments often hold the loudest truths. Remember to pause.</div>
+                    </div>
+
+                    <div class="note-canvas canvas-4">
+                        <div class="note-header"><span class="note-dot dot-pink"></span>Goals</div>
+                        <div class="note-title">This Month</div>
+                        <div class="note-text">Read 2 books<br>Launch side project<br>Morning runs</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-minimal" id="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-number">01</div>
+                    <div class="feature-title">Distraction-free writing</div>
+                    <div class="feature-description">A clean canvas that adapts to your flow. Write without friction, organize without thinking.</div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-number">02</div>
+                    <div class="feature-title">Always accessible</div>
+                    <div class="feature-description">Access your notes from anywhere. Write on your computer, check on your phone, seamless sync across all devices.</div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-number">03</div>
+                    <div class="feature-title">Private by design</div>
+                    <div class="feature-description">Your thoughts belong to you. We encrypt everything and never peek at your notes.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonial-section">
+        <div class="container">
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="quote-mark">"</div>
+                    <p class="testimonial-text">Finally, a note app that doesn't get in my way. Just open and write.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background: linear-gradient(135deg, #ffb380, #ff8c5a);"></div>
+                        <div>
+                            <div class="author-name">Calvin Klein</div>
+                            <div class="author-role">Product Designer</div>
                         </div>
-                        
-                        <!-- Custom styled navigation buttons -->
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselPicture" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselPicture" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                        
-                        <!-- Carousel indicators -->
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselPicture" data-bs-slide-to="0" class="active bg-primary" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselPicture" data-bs-slide-to="1" class="bg-primary" aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselPicture" data-bs-slide-to="2" class="bg-primary" aria-label="Slide 3"></button>
-                            <button type="button" data-bs-target="#carouselPicture" data-bs-slide-to="3" class="bg-primary" aria-label="Slide 4"></button>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="quote-mark">"</div>
+                    <p class="testimonial-text">I've tried dozens of note apps. This is the one that stuck.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background: linear-gradient(135deg, #80c5dd, #5da8c4);"></div>
+                        <div>
+                            <div class="author-name">William Shakespeare</div>
+                            <div class="author-role">Writer</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="quote-mark">"</div>
+                    <p class="testimonial-text">Clean, simple, beautiful. Everything a notes app should be.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background: linear-gradient(135deg, #a8d5a8, #7ec47e);"></div>
+                        <div>
+                            <div class="author-name">Steve Jobs</div>
+                            <div class="author-role">Developer</div>
                         </div>
                     </div>
                 </div>
@@ -93,63 +137,51 @@
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="py-5">
+    <section class="cta-section">
         <div class="container">
-            <h2 class="text-center mb-5">Why Choose 4Notes?</h2>
-            <div class="row g-4">
-                <!-- Feature Card 1 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <i class="bi bi-pencil-square text-primary fs-1 mb-3"></i>
-                            <h4 class="card-title">Easy Note Taking</h4>
-                            <p class="card-text">Create and edit notes with our intuitive interface. Rich text formatting included.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Feature Card 2 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <i class="bi bi-cloud-check text-primary fs-1 mb-3"></i>
-                            <h4 class="card-title">Cloud Sync</h4>
-                            <p class="card-text">Access your notes from any device. Changes sync automatically in real-time.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Feature Card 3 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <i class="bi bi-folder2-open text-primary fs-1 mb-3"></i>
-                            <h4 class="card-title">Organize Better</h4>
-                            <p class="card-text">Keep notes organized with folders, tags, and powerful search capabilities.</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="cta-content">
+                <h2 class="cta-title">Start writing today</h2>
+                <p class="cta-subtitle">Join thousands who've found their perfect note-taking space</p>
+                <button class="btn-primary-custom btn-large" onclick="window.location.href='register.html'">Get Started Free</button>
+                <p class="cta-note">No credit card required • Free forever</p>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white py-2">
+    <footer class="footer">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h5 class="mb-2">4Notes</h5>
-                    <p class="mb-0">Your digital note-taking solution. Simple, secure, and always available.</p>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">4notes</div>
+                    <p class="footer-tagline">Your thoughts, beautifully organized</p>
                 </div>
-                <div class="col-md-6 text-md-end mt-3 mt-md-0">
-                    <a href="#" class="text-white text-decoration-none me-3">Terms</a>
-                    <a href="#" class="text-white text-decoration-none me-3">Privacy</a>
-                    <a href="#" class="text-white text-decoration-none">Contact</a>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Product</h4>
+                        <a href="#">Features</a>
+                        <a href="#">Pricing</a>
+                        <a href="#">Updates</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <a href="#">About</a>
+                        <a href="#">Blog</a>
+                        <a href="#">Contact</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <a href="#">Privacy</a>
+                        <a href="#">Terms</a>
+                        <a href="#">Security</a>
+                    </div>
                 </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 4notes. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="Js/landing_page.js"></script>
 </body>
 </html>

@@ -1,223 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>OTP Verification - FourNotes</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Code - 4notes</title>
+    <link rel="stylesheet" href="css/otp_code.css">
 </head>
-<body class="bg-dark d-flex flex-column min-vh-100" style="background: linear-gradient(180deg, #0a2342 0%, #19324d 100%);">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg py-3 bg-white shadow-sm fixed-top">
-        <div class="container">
-            <!-- Brand -->
-            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-                <span class="d-flex align-items-center justify-content-center" style="width:45px; height:45px;">
-                    <img src="assets/images/logo.png" alt="4Notes Logo" style="width: 120px; height: 120px; object-fit: contain;">
-                </span>
-                <div class="d-flex flex-column">
-                    <span class="text-primary" style="font-size: 0.75rem; letter-spacing: 2px;">NOTE TAKING SOLUTION</span>
-                </div>
-            </a>
-        </div>
-    </nav>
 
-    <!-- Main Content -->
-    <main class="flex-grow-1 d-flex align-items-center">
-        <div class="container py-5" style="margin-top: 4rem;">
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-10 col-lg-8 col-xl-7">
-                    <div class="card shadow-lg border-0 rounded-4 overflow-hidden my-4">
-                        <div class="row g-0">
-                            <!-- Left Side Image & Text: Hide on screens < 768px -->
-                            <div class="col-md-6 d-none d-md-flex flex-column justify-content-center align-items-center bg-dark position-relative" style="background: url('assets/images/verification.jpg') center center / cover no-repeat;">
-                                <div class="position-absolute top-0 start-0 w-100 h-100" style="background: rgba(10,35,66,0.7);"></div>
-                                <div class="position-relative text-center p-4">
-                                    <div class="mb-4">
-                                        <i class="bi bi-shield-check text-white" style="font-size: 4rem;"></i>
-                                    </div>
-                                    <h2 class="text-white fw-bold mb-3">Verification Required</h2>
-                                    <p class="text-white-50 mb-0">Please enter the 4-digit code sent to your number.</p>
-                                </div>
-                            </div>
-                            <!-- Right Side Form -->
-                            <div class="col-12 col-md-6 bg-white">
-                                <div class="p-4 p-md-5">
-                                    <h4 class="fw-bold text-uppercase text-dark mb-4 text-center">Enter OTP Code</h4>
-                                    <form id="otpForm">
-                                        <div class="text-center mb-4 ps-3 pe-3">
-                                            <div class="d-flex gap-2 gap-md-3 justify-content-center">
-                                                <input type="text" class="form-control form-control-lg text-center fw-bold" 
-                                                    maxlength="1" 
-                                                    style="width: 50px; height: 50px;"
-                                                    oninput="moveToNext(this, 0)"
-                                                    required>
-                                                <input type="text" class="form-control form-control-lg text-center fw-bold" 
-                                                    maxlength="1" 
-                                                    style="width: 50px; height: 50px;"
-                                                    oninput="moveToNext(this, 1)"
-                                                    required>
-                                                <input type="text" class="form-control form-control-lg text-center fw-bold" 
-                                                    maxlength="1" 
-                                                    style="width: 50px; height: 50px;"
-                                                    oninput="moveToNext(this, 2)"
-                                                    required>
-                                                <input type="text" class="form-control form-control-lg text-center fw-bold" 
-                                                    maxlength="1" 
-                                                    style="width: 50px; height: 50px;"
-                                                    oninput="moveToNext(this, 3)"
-                                                    required>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary w-100 rounded-3 py-2 fw-bold mb-3">
-                                            Verify Code
-                                        </button>
-                                        <div class="text-center mb-3">
-                                            <a href="forgot.html" class="btn btn-outline-secondary rounded-pill px-4">
-                                                <i class="bi bi-arrow-left"></i> Back
-                                            </a>
-                                        </div>
-                                        <div class="text-center">
-                                            <p class="mb-0 text-secondary">Didn't receive the code?</p>
-                                            <a href="#" class="text-primary text-decoration-none" onclick="resendCode()">
-                                                Resend Code
-                                            </a>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+<body>
+    <div class="verify-wrapper">
+        <div class="left-panel">
+            <div class="floating-notes">
+                <div class="floating-note">
+                    <div class="note-line"></div>
+                    <div class="note-line"></div>
+                    <div class="note-line"></div>
+                </div>
+                <div class="floating-note">
+                    <div class="note-line"></div>
+                    <div class="note-line"></div>
+                    <div class="note-line"></div>
+                </div>
+                <div class="floating-note">
+                    <div class="note-line"></div>
+                    <div class="note-line"></div>
+                    <div class="note-line"></div>
+                </div>
+            </div>
+
+            <div class="brand-section">
+                <div class="logo-large">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path
+                                d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z" />
+                            <path d="M8 15h8v2H8v-2zm0-4h8v2H8v-2zm0-4h5v2H8V7z" />
+                        </svg>
                     </div>
+                    4notes
+                </div>
+                <p class="tagline">We've sent a verification code to your email. Check your inbox and enter it below.
+                </p>
+            </div>
+
+            <div class="illustration">
+                <div class="email-illustration">
+                    <svg class="email-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                        <polyline points="22,6 12,13 2,6" />
+                    </svg>
                 </div>
             </div>
         </div>
-    </main>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white py-4 mt-auto">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6">
+        <div class="right-panel">
+            <div class="shape-blob blob-1"></div>
+            <div class="shape-blob blob-2"></div>
+
+            <div class="verify-container">
+                <a href="forgot.html" class="back-link">
+                    <svg class="back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
+                    </svg>
+                    Back
+                </a>
+
+                <div class="verify-header">
+                    <h1 class="verify-title">Verify your email</h1>
+                    <p class="verify-subtitle">
+                        Enter the 6-digit code we sent to<br>
+                        <span class="verify-email">john.doe@example.com</span>
+                    </p>
                 </div>
-                <div class="col-md-6">
-                    <div class="d-flex flex-column flex-md-row justify-content-md-end align-items-md-center">
-                        <div class="text-white-50 mb-2 mb-md-0">
-                            © 2025 4Notes. All rights reserved.
-                        </div>
-                        <div class="ms-md-4">
-                            <a href="#" class="text-white-50 text-decoration-none me-3">Privacy Policy</a>
-                            <a href="#" class="text-white-50 text-decoration-none">Terms of Service</a>
-                        </div>
+
+                <div class="info-box">
+                    <p>The code will expire in 10 minutes. If you don't see the email, check your spam folder.</p>
+                </div>
+
+                <div class="success-message" id="successMessage">
+                    <p><strong>Code resent!</strong> Check your email for the new verification code.</p>
+                </div>
+
+                <form id="verifyForm" action="verify_otp_process.php" method="POST">
+                    <div class="otp-container">
+                        <input type="text" maxlength="1" class="otp-input" id="otp1" required>
+                        <input type="text" maxlength="1" class="otp-input" id="otp2" required>
+                        <input type="text" maxlength="1" class="otp-input" id="otp3" required>
+                        <input type="text" maxlength="1" class="otp-input" id="otp4" required>
                     </div>
+
+                    <div class="error-message" id="errorMessage">Invalid verification code. Please try again.</div>
+
+                    <button type="submit" class="btn-verify">Verify Code</button>
+                </form>
+
+                <div class="resend-section">
+                    <p class="resend-text">
+                        Didn't receive the code?
+                    </p>
+                    <a class="resend-link" id="resendLink" onclick="resendCode()">Resend Code</a>
+                    <div class="timer" id="timer"></div>
                 </div>
             </div>
         </div>
-    </footer>
+    </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="Js/otp_code.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        function moveToNext(input, index) {
-            if (input.value.length === 1) {
-                const inputs = document.querySelectorAll('#otpForm input[type="text"]');
-                if (index < inputs.length - 1) {
-                    inputs[index + 1].focus();
-                }
-            }
-        }
-
-        $(document).ready(function() {
-            $("#otpForm input").keydown(function(e) {
-                if (e.key === "Backspace" && !this.value) {
-                    const inputs = document.querySelectorAll('#otpForm input[type="text"]');
-                    const index = Array.from(inputs).indexOf(this);
-                    if (index > 0) {
-                        inputs[index - 1].focus();
-                    }
-                }
-            });
-        });
-        $("#otpForm").submit(function(e) {
-            e.preventDefault();
-            const email = sessionStorage.getItem("email");
-            if(!email) {
-                alert("Start from the forgot password page.");
-                window.location.href = "forgot.html";
-                return;
-            }
-
-            let otp = "";
-            $("#otpForm input").each(function() { 
-                otp += $(this).val(); 
-            });
-            
-            if(otp.length !== 4) { 
-                alert("Enter all 4 digits"); 
-                return; 
-            }
-
-            $.ajax({
-                url: "otp_code.php", // Fixed: was missing the filename
-                type: "POST",
-                data: { 
-                    email: email, 
-                    otp: otp 
-                },
-                dataType: "json",
-                success: function(response) {
-                    if(response.success) {
-                        sessionStorage.setItem("verified_user_id", response.user_id);
-                        alert("OTP verified successfully!");
-                        window.location.href = "newpassword.html";
-                    } else {
-                        alert(response.message || "Invalid OTP");
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error("Error:", error);
-                    alert("Error occurred. Please try again.");
-                }
-            });
-        });
-
-        function resendCode() {
-            const email = sessionStorage.getItem("email");
-            if(!email) {
-                alert("Start from forgot password page.");
-                window.location.href = "forgot.html";
-                return;
-            }
-
-            $.ajax({
-                url: "forgot.php",
-                type: "POST",
-                data: { email: email },
-                dataType: "json",
-                success: function(response) {
-                    if(response.success) {
-                        if(response.otp) { // For local testing
-                            alert("New OTP (for testing): " + response.otp);
-                        } else {
-                            alert("New OTP sent to your email");
-                        }
-                        // Clear all input fields
-                        $("#otpForm input").val('');
-                        $("#otpForm input:first").focus();
-                    } else {
-                        alert(response.message || "Failed to send new OTP");
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error("Error:", error);
-                    alert("Failed to send new OTP. Please try again.");
-                }
-            });
-        }
-    </script>
 </body>
+
 </html>

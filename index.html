@@ -3,150 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome - Choose Your Role</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
-    <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        .role-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 3rem 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            height: 100%;
-            text-decoration: none;
-            color: inherit;
-        }
-        
-        .role-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            background: rgba(255, 255, 255, 1);
-            color: inherit;
-            text-decoration: none;
-        }
-        
-        .role-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
-        }
-        
-        .user-card .role-icon {
-            color: #28a745;
-        }
-        
-        .admin-card .role-icon {
-            color: #dc3545;
-        }
-        
-        .role-card:hover .role-icon {
-            transform: scale(1.1);
-        }
-        
-        .role-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-        
-        .role-description {
-            color: #6c757d;
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-        
-        .main-title {
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            font-weight: 300;
-            margin-bottom: 3rem;
-        }
-        
-        .container-custom {
-            max-width: 900px;
-        }
-        
-        @media (max-width: 768px) {
-            .role-card {
-                margin-bottom: 2rem;
-                padding: 2rem 1.5rem;
-            }
-            
-            .role-icon {
-                font-size: 3rem;
-            }
-            
-            .role-title {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+    <title>Welcome - 4notes</title>
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-    <div class="container container-custom">
-        <div class="row min-vh-100 align-items-center justify-content-center">
-            <div class="col-12">
-                <div class="text-center mb-5">
-                    <h1 class="main-title display-4">Welcome to Our Platform</h1>
-                    <p class="text-white-50 lead">Please select your role to continue</p>
-                </div>
-                
-                <div class="row g-4">
-                    <!-- User Role Card -->
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <a href="landing_page.html" class="role-card user-card d-block">
-                            <div class="role-icon">
-                                👤
-                            </div>
-                            <h3 class="role-title">User</h3>
-                            <p class="role-description">
-                                Access the main application with standard user privileges. 
-                                Browse content, manage your profile, and enjoy all user features.
-                            </p>
-                            <div class="mt-3">
-                                <span class="badge bg-success px-3 py-2">Continue as User</span>
-                            </div>
-                        </a>
-                    </div>
-                    
-                    <!-- Admin Role Card -->
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <a href="admin_login.html" class="role-card admin-card d-block">
-                            <div class="role-icon">
-                                🛡️
-                            </div>
-                            <h3 class="role-title">Administrator</h3>
-                            <p class="role-description">
-                                Access the admin panel with full system privileges. 
-                                Manage users, content, settings, and system configuration.
-                            </p>
-                            <div class="mt-3">
-                                <span class="badge bg-danger px-3 py-2">Admin Login</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Optional Footer -->
-                <div class="text-center mt-5">
-                    <small class="text-white-50">
-                        Need help? <a href="#" class="text-white">Contact Support</a>
-                    </small>
-                </div>
-            </div>
-        </div>
+    <div class="background-shapes">
+        <div class="shape-blob blob-1"></div>
+        <div class="shape-blob blob-2"></div>
+        <div class="shape-blob blob-3"></div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <header>
+        <div class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" fill="white">
+                    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/>
+                    <path d="M8 15h8v2H8v-2zm0-4h8v2H8v-2zm0-4h5v2H8V7z"/>
+                </svg>
+            </div>
+            4notes
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="welcome-section">
+                <h1 class="welcome-title">Welcome to 4notes</h1>
+                <p class="welcome-subtitle">Choose your access level to continue</p>
+            </div>
+
+            <div class="cards-container">
+                <!-- User Card -->
+                <a href="landing_page.html" class="role-card user-card">
+                    <div class="role-icon-wrapper">
+                        <div class="role-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h2 class="role-title">User Access</h2>
+                    <p class="role-description">
+                        Start writing and organizing your thoughts in a beautiful, distraction-free environment
+                    </p>
+                    <ul class="role-features">
+                        <li class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Create and manage your notes</span>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Sync across all devices</span>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Organize with tags and folders</span>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>End-to-end encryption</span>
+                        </li>
+                    </ul>
+                    <div class="role-badge">
+                        Continue as User
+                        <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Admin Card -->
+                <a href="admin_login.html" class="role-card admin-card">
+                    <div class="role-icon-wrapper">
+                        <div class="role-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                <path d="M9 12l2 2 4-4"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h2 class="role-title">Admin Access</h2>
+                    <p class="role-description">
+                        Full system control and management capabilities for authorized administrators
+                    </p>
+                    <ul class="role-features">
+                        <li class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>User management and permissions</span>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>System configuration and settings</span>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Analytics and reporting tools</span>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Security and audit logs</span>
+                        </li>
+                    </ul>
+                    <div class="role-badge">
+                        Admin Login
+                        <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p class="footer-text">
+            Need help? <a href="#" class="footer-link">Contact Support</a>
+        </p>
+    </footer>
 </body>
 </html>
