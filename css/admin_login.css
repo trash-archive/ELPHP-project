@@ -445,18 +445,18 @@ body {
 .form-label {
     position: absolute;
     left: 3.5rem;
-    top: 1rem;
-    font-size: 0.85rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
     color: #999;
     transition: all 0.3s ease;
     pointer-events: none;
-    background: white;
-    padding: 0 0.3rem;
+    padding: 0;
 }
 
 .form-input {
     width: 100%;
-    padding: 1.5rem 1rem 0.5rem 3.5rem;
+    padding: 1rem 1rem 1rem 3.5rem;
     font-size: 1rem;
     color: #2d2d2d;
     background: white;
@@ -475,9 +475,12 @@ body {
 .form-input:focus+.form-label,
 .form-input:not(:placeholder-shown)+.form-label {
     top: -0.5rem;
-    left: 3.5rem;
+    left: 3rem;
+    transform: translateY(0);
     font-size: 0.75rem;
     color: #ffb380;
+    background: #faf9f7;
+    padding: 0 0.5rem;
 }
 
 .password-container {
@@ -496,6 +499,7 @@ body {
     font-size: 0.85rem;
     transition: color 0.3s ease;
     font-weight: 500;
+    z-index: 2;
 }
 
 .toggle-password:hover {
@@ -561,4 +565,20 @@ body {
     .login-title {
         font-size: 2rem;
     }
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+    -webkit-text-fill-color: #2d2d2d !important;
+    transition: background-color 9999s ease-in-out 0s;
+}
+
+input:-webkit-autofill+.form-label {
+    top: -0.5rem;
+    left: 3rem;
+    transform: translateY(0);
+    font-size: 0.75rem;
+    color: #ffb380;
+    background: #faf9f7;
+    padding: 0 0.5rem;
 }
