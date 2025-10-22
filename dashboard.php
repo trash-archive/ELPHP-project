@@ -14,6 +14,40 @@ require_once 'db_connect.php';
 $user_id = $_SESSION['user_id'];
 $method = $_SERVER['REQUEST_METHOD'];
 
+/**
+ * 🚫 Content moderation function
+ * Blocks prohibited or unsafe content.
+ */
+function contains_prohibited_content($text) {
+    $prohibited_patterns = [
+        // Profanity & vulgarity
+        '/\b(fuck|shit|bitch|asshole|bastard|dick|pussy|cunt|nigger|faggot|slut|whore)\b/i',
+
+        // Hate speech or discrimination
+        '/\b(kill all|hate|racist|terrorist|inferior|supremacy)\b/i',
+
+        // Violence or gore
+        '/\b(kill|murder|blood|torture|gore|behead|suicide|shoot|stab)\b/i',
+
+        // Sexual content
+        '/\b(sex|porn|nude|naked|vagina|penis|orgasm|masturbate|anal|blowjob|xxx)\b/i',
+
+        // Illegal activities
+        '/\b(drugs|cocaine|heroin|meth|weapon|explosive|hacked|hack|illegal|scam)\b/i',
+
+        // Self-harm
+        '/\b(self.?harm|suicide|cutting|kill myself|end my life)\b/i',
+    ];
+
+    foreach ($prohibited_patterns as $pattern) {
+        if (preg_match($pattern, $text)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 switch ($method) {
 
     // 🟢 GET — Fetch notes or perform search
@@ -68,6 +102,15 @@ switch ($method) {
             break;
         }
 
+        // 🚫 Check for prohibited content
+        if (contains_prohibited_content($title) || contains_prohibited_content($content)) {
+            echo json_encode([
+                "success" => false,
+                "message" => "Your note contains prohibited content. Please remove offensive, violent, or explicit language."
+            ]);
+            break;
+        }
+
         $stmt = $conn->prepare("INSERT INTO notes (user_id, title, content, is_archived) VALUES (?, ?, ?, 0)");
         $stmt->bind_param("iss", $user_id, $title, $content);
         $success = $stmt->execute();
@@ -97,6 +140,15 @@ switch ($method) {
 
         if (!$note_id || empty($title) || empty($content)) {
             echo json_encode(["success" => false, "message" => "Invalid update data"]);
+            break;
+        }
+
+        // 🚫 Check for prohibited content
+        if (contains_prohibited_content($title) || contains_prohibited_content($content)) {
+            echo json_encode([
+                "success" => false,
+                "message" => "Your update contains prohibited content. Please remove offensive, violent, or explicit language."
+            ]);
             break;
         }
 

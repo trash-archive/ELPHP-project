@@ -9,6 +9,385 @@
 </head>
 
 <body>
+    <!-- Terms of Service Modal -->
+    <div class="modal-overlay" id="termsModal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-header-content">
+                    <div class="modal-title-section">
+                        <!-- <div class="modal-logo">
+                            <div class="modal-logo-icon">
+                                <svg viewBox="0 0 24 24" fill="white">
+                                    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/>
+                                    <path d="M8 15h8v2H8v-2zm0-4h8v2H8v-2zm0-4h5v2H8V7z"/>
+                                </svg>
+                            </div>
+                            <span class="modal-logo-text">4notes</span>
+                        </div> -->
+                        <h2 class="modal-title">Terms of Service</h2>
+                        <p class="modal-subtitle">Last Updated: October 20, 2025</p>
+                    </div>
+                    <button class="modal-close" onclick="closeModal('termsModal')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <p>Welcome to 4notes! By using our service, you agree to these Terms of Service. Please read them carefully.</p>
+
+                <h2>1. Acceptance of Terms</h2>
+                <p>By creating an account and using 4notes, you agree to be bound by these Terms of Service and our Privacy Policy. If you do not agree to these terms, please do not use our service.</p>
+
+                <h2>2. Service Description</h2>
+                <p>4notes is a note-taking application that provides users with a secure platform to create, store, and manage personal notes. We are committed to maintaining a positive, healthy, and respectful community environment.</p>
+
+                <h2>3. Data Storage and Security</h2>
+                
+                <div class="highlight-box">
+                    <h3>Your Data is Protected</h3>
+                    <p>We take data security seriously. Your notes are stored securely on our servers with industry-standard encryption and security measures.</p>
+                </div>
+
+                <h3>3.1 Data Ownership</h3>
+                <p>You retain ownership of all content you create on 4notes. However, by using our service, you grant us the right to store and process your data as necessary to provide the service.</p>
+
+                <h3>3.2 Administrative Access</h3>
+                <p>While we respect your privacy, system administrators have the capability to access user notes for the following purposes:</p>
+                <ul>
+                    <li>Ensuring compliance with these Terms of Service</li>
+                    <li>Investigating reports of violations or abuse</li>
+                    <li>Maintaining system security and integrity</li>
+                    <li>Responding to legal requirements or law enforcement requests</li>
+                    <li>Providing technical support when requested by users</li>
+                </ul>
+
+                <h3>3.3 Data Retention</h3>
+                <p>Your notes will be retained for as long as your account is active. Upon account deletion, your data will be permanently removed from our systems within 30 days.</p>
+
+                <h2>4. Community Standards and Content Policy</h2>
+
+                <div class="warning-box">
+                    <h3>Healthy Community Commitment</h3>
+                    <p>4notes is committed to fostering a healthy, positive, and respectful community. We have zero tolerance for content that violates our community standards.</p>
+                </div>
+
+                <h3>4.1 Prohibited Content</h3>
+                <p>The following types of content are strictly prohibited on 4notes:</p>
+                <ul>
+                    <li><strong>Profanity and Offensive Language:</strong> Cursed words, vulgar language, and profanity are not allowed. We promote healthy communication and positive expression.</li>
+                    <li><strong>Hate Speech:</strong> Content that promotes hatred, discrimination, or violence against individuals or groups based on race, ethnicity, religion, gender, sexual orientation, disability, or any other characteristic.</li>
+                    <li><strong>Harassment and Bullying:</strong> Content intended to harass, intimidate, or threaten others.</li>
+                    <li><strong>Violent or Graphic Content:</strong> Descriptions of violence, gore, or graphic content that could disturb others.</li>
+                    <li><strong>Sexual Content:</strong> Sexually explicit material or content of a sexual nature.</li>
+                    <li><strong>Illegal Activities:</strong> Content that promotes, encourages, or facilitates illegal activities.</li>
+                    <li><strong>Spam and Malicious Content:</strong> Spam, scams, malware, or any content designed to harm users or systems.</li>
+                    <li><strong>Self-Harm Content:</strong> Content that promotes or glorifies self-harm or suicide.</li>
+                </ul>
+
+                <h3>4.2 Content Monitoring</h3>
+                <p>We employ automated systems and manual review processes to detect prohibited content. Notes containing violations may be flagged for administrative review.</p>
+
+                <h3>4.3 Enforcement Actions</h3>
+                <p>Violations of our content policy may result in:</p>
+                <ol>
+                    <li>Warning notification to the user</li>
+                    <li>Temporary suspension of account access</li>
+                    <li>Permanent termination of account</li>
+                    <li>Reporting to relevant authorities if illegal content is discovered</li>
+                </ol>
+
+                <h2>5. User Responsibilities</h2>
+
+                <h3>5.1 Account Security</h3>
+                <p>You are responsible for:</p>
+                <ul>
+                    <li>Maintaining the confidentiality of your password</li>
+                    <li>All activities that occur under your account</li>
+                    <li>Notifying us immediately of any unauthorized access</li>
+                </ul>
+
+                <h3>5.2 Acceptable Use</h3>
+                <p>You agree to:</p>
+                <ul>
+                    <li>Use 4notes only for lawful purposes</li>
+                    <li>Respect the rights and dignity of others</li>
+                    <li>Not attempt to circumvent content filtering systems</li>
+                    <li>Not share your account credentials with others</li>
+                    <li>Not use automated systems to create or manipulate content</li>
+                </ul>
+
+                <h2>6. Privacy and Confidentiality</h2>
+                <p>While we make every effort to keep your notes private, please be aware that:</p>
+                <ul>
+                    <li>No system is 100% secure</li>
+                    <li>Administrators may access notes for the purposes outlined in Section 3.2</li>
+                    <li>We may be required to disclose information in response to legal requests</li>
+                </ul>
+                <p>For more details, please review our <a href="#" class="terms-link" onclick="openModal('privacyModal'); closeModal('termsModal'); return false;">Privacy Policy</a>.</p>
+
+                <h2>7. Intellectual Property</h2>
+                <p>The 4notes platform, including its design, features, and functionality, is owned by 4notes and protected by copyright, trademark, and other intellectual property laws.</p>
+
+                <h2>8. Limitation of Liability</h2>
+                <p>4notes is provided "as is" without warranties of any kind. We are not liable for:</p>
+                <ul>
+                    <li>Loss of data due to technical failures or user error</li>
+                    <li>Unauthorized access to your account despite security measures</li>
+                    <li>Any damages arising from use or inability to use the service</li>
+                </ul>
+
+                <h2>9. Changes to Terms</h2>
+                <p>We reserve the right to modify these Terms of Service at any time. We will notify users of significant changes via email or platform notification. Continued use of 4notes after changes constitutes acceptance of the modified terms.</p>
+
+                <h2>10. Termination</h2>
+                <p>We reserve the right to suspend or terminate accounts that violate these Terms of Service. You may also terminate your account at any time by contacting support or using the account deletion feature.</p>
+
+                <h2>11. Contact Information</h2>
+                <p>If you have questions about these Terms of Service, please contact us at:</p>
+                <ul>
+                    <li>Email: support@4notes.com</li>
+                    <li>Support Portal: Available through your account dashboard</li>
+                </ul>
+
+                <div class="highlight-box" style="margin-top: 2rem;">
+                    <h3>Our Commitment to You</h3>
+                    <p>At 4notes, we're committed to providing a safe, positive, and productive environment for all users. We believe in promoting healthy communication, respect, and well-being. Together, we can build a community that inspires creativity and positive expression.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div class="modal-overlay" id="privacyModal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-header-content">
+                    <div class="modal-title-section">
+                        <div class="modal-logo">
+                            <div class="modal-logo-icon">
+                                <svg viewBox="0 0 24 24" fill="white">
+                                    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/>
+                    <path d="M8 15h8v2H8v-2zm0-4h8v2H8v-2zm0-4h5v2H8V7z"/>
+                                </svg>
+                            </div>
+                            <span class="modal-logo-text">4notes</span>
+                        </div>
+                        <h2 class="modal-title">Privacy Policy</h2>
+                        <p class="modal-subtitle">Last Updated: October 20, 2025</p>
+                    </div>
+                    <button class="modal-close" onclick="closeModal('privacyModal')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <p>At 4notes, your privacy is important to us. This Privacy Policy explains how we collect, use, store, and protect your personal information when you use our note-taking service.</p>
+
+                <h2>1. Information We Collect</h2>
+
+                <h3>1.1 Account Information</h3>
+                <p>When you create an account, we collect:</p>
+                <ul>
+                    <li>First name and last name</li>
+                    <li>Email address</li>
+                    <li>Password (encrypted and stored securely)</li>
+                    <li>Account creation date</li>
+                </ul>
+
+                <h3>1.2 Content Data</h3>
+                <p>We store the notes and content you create within the 4notes platform, including:</p>
+                <ul>
+                    <li>Note text and formatting</li>
+                    <li>Creation and modification timestamps</li>
+                    <li>Note organization and categorization</li>
+                </ul>
+
+                <h3>1.3 Technical Information</h3>
+                <p>We automatically collect certain technical information:</p>
+                <ul>
+                    <li>IP address and general location (city/region level)</li>
+                    <li>Device type and operating system</li>
+                    <li>Browser type and version</li>
+                    <li>Login times and activity patterns</li>
+                </ul>
+
+                <h2>2. How We Use Your Information</h2>
+
+                <h3>2.1 Service Provision</h3>
+                <p>We use your information to:</p>
+                <ul>
+                    <li>Create and maintain your account</li>
+                    <li>Store and sync your notes across devices</li>
+                    <li>Provide customer support</li>
+                    <li>Improve and optimize our service</li>
+                </ul>
+
+                <h3>2.2 Security and Compliance</h3>
+                <p>We process your information to:</p>
+                <ul>
+                    <li>Detect and prevent fraud and abuse</li>
+                    <li>Enforce our Terms of Service</li>
+                    <li>Monitor for prohibited content and community standards violations</li>
+                    <li>Comply with legal obligations</li>
+                </ul>
+
+                <h2>3. Data Storage and Security</h2>
+
+                <div class="highlight-box">
+                    <h3>Secure Storage</h3>
+                    <p>Your data is stored on secure servers with industry-standard encryption. We implement multiple layers of security to protect your information from unauthorized access.</p>
+                </div>
+
+                <h3>3.1 Data Protection Measures</h3>
+                <ul>
+                    <li><strong>Encryption:</strong> All data transmitted between your device and our servers is encrypted using SSL/TLS protocols</li>
+                    <li><strong>Password Security:</strong> Passwords are hashed using strong cryptographic algorithms and never stored in plain text</li>
+                    <li><strong>Access Controls:</strong> Strict access controls limit who can view or modify data</li>
+                    <li><strong>Regular Security Audits:</strong> We conduct regular security assessments to identify and address vulnerabilities</li>
+                </ul>
+
+                <h3>3.2 Administrator Access</h3>
+                <div class="info-box">
+                    <h3>Transparency About Access</h3>
+                    <p>We believe in transparency. System administrators may access user notes in specific, limited circumstances to ensure the safety and integrity of our platform.</p>
+                </div>
+
+                <p>Administrator access to your notes may occur when:</p>
+                <ul>
+                    <li><strong>Content Moderation:</strong> Investigating reports of Terms of Service violations</li>
+                    <li><strong>Security Incidents:</strong> Responding to security breaches or suspicious activity</li>
+                    <li><strong>Legal Requirements:</strong> Complying with valid legal requests from law enforcement</li>
+                    <li><strong>Technical Support:</strong> Troubleshooting issues you report (with your permission)</li>
+                    <li><strong>System Maintenance:</strong> Ensuring platform stability and performance</li>
+                </ul>
+
+                <p>All administrative access is logged and monitored. Administrators are bound by strict confidentiality agreements and are trained in privacy and security best practices.</p>
+
+                <h2>4. Content Monitoring and Community Safety</h2>
+
+                <h3>4.1 Automated Content Filtering</h3>
+                <p>To maintain a healthy and positive community, we employ automated systems that:</p>
+                <ul>
+                    <li>Scan notes for prohibited content including profanity, hate speech, and harmful content</li>
+                    <li>Flag potential violations for review</li>
+                    <li>Help enforce our community standards</li>
+                </ul>
+
+                <h3>4.2 Why We Monitor Content</h3>
+                <p>Content monitoring helps us:</p>
+                <ul>
+                    <li>Protect users from harmful or abusive content</li>
+                    <li>Maintain a respectful and healthy community environment</li>
+                    <li>Prevent illegal activities on our platform</li>
+                    <li>Comply with legal requirements and regulations</li>
+                </ul>
+
+                <h3>4.3 Your Privacy During Monitoring</h3>
+                <p>We respect your privacy while maintaining community safety:</p>
+                <ul>
+                    <li>Automated systems only flag content that matches violation patterns</li>
+                    <li>Human review only occurs when content is flagged</li>
+                    <li>Reviewers are trained in privacy and data handling</li>
+                    <li>Only content necessary for review is accessed</li>
+                </ul>
+
+                <h2>5. Data Sharing and Disclosure</h2>
+
+                <h3>5.1 We Do NOT Sell Your Data</h3>
+                <p>We will never sell your personal information or notes to third parties for marketing or advertising purposes.</p>
+
+                <h3>5.2 Limited Disclosure Scenarios</h3>
+                <p>We may share information only in these specific cases:</p>
+                <ul>
+                    <li><strong>Legal Obligations:</strong> When required by law, court order, or government request</li>
+                    <li><strong>Safety and Security:</strong> To prevent harm to individuals or protect our rights and property</li>
+                    <li><strong>Service Providers:</strong> With trusted partners who help us operate our service (e.g., hosting providers) under strict confidentiality agreements</li>
+                    <li><strong>Business Transfers:</strong> In the event of a merger, acquisition, or sale of assets (users would be notified)</li>
+                </ul>
+
+                <h2>6. Your Rights and Choices</h2>
+
+                <h3>6.1 Access and Control</h3>
+                <p>You have the right to:</p>
+                <ul>
+                    <li><strong>Access:</strong> View all personal information we have about you</li>
+                    <li><strong>Edit:</strong> Update your account information at any time</li>
+                    <li><strong>Delete:</strong> Request deletion of your account and all associated data</li>
+                    <li><strong>Export:</strong> Download a copy of your notes and data</li>
+                </ul>
+
+                <h3>6.2 Account Deletion</h3>
+                <p>If you choose to delete your account:</p>
+                <ul>
+                    <li>All your notes and personal data will be permanently deleted within 30 days</li>
+                    <li>Some data may be retained for legal or security purposes (e.g., in case of ongoing investigations)</li>
+                    <li>The deletion process is irreversible</li>
+                </ul>
+
+                <h2>7. Data Retention</h2>
+                <p>We retain your data for different periods based on type:</p>
+                <ul>
+                    <li><strong>Account Data:</strong> Kept while your account is active</li>
+                    <li><strong>Notes:</strong> Stored until you delete them or close your account</li>
+                    <li><strong>Deleted Content:</strong> Removed from active systems within 30 days</li>
+                    <li><strong>Logs and Metadata:</strong> Retained for up to 90 days for security and troubleshooting</li>
+                </ul>
+
+                <h2>8. Children's Privacy</h2>
+                <p>4notes is intended for users aged 13 and older. We do not knowingly collect information from children under 13. If we discover that we have collected data from a child under 13, we will delete it immediately.</p>
+
+                <h2>9. International Data Transfers</h2>
+                <p>Your data may be stored and processed in servers located in different countries. We ensure that appropriate safeguards are in place to protect your data regardless of where it is processed.</p>
+
+                <h2>10. Cookies and Tracking</h2>
+                <p>We use cookies and similar technologies to:</p>
+                <ul>
+                    <li>Keep you logged in</li>
+                    <li>Remember your preferences</li>
+                    <li>Analyze platform usage and improve performance</li>
+                    <li>Enhance security</li>
+                </ul>
+                <p>You can control cookies through your browser settings, though some features may not work properly if cookies are disabled.</p>
+
+                <h2>11. Changes to This Policy</h2>
+                <p>We may update this Privacy Policy from time to time. We will notify you of significant changes via:</p>
+                <ul>
+                    <li>Email notification to your registered email address</li>
+                    <li>In-app notification when you log in</li>
+                    <li>Update notice on our website</li>
+                </ul>
+                <p>Continued use of 4notes after changes indicates acceptance of the updated policy.</p>
+
+                <h2>12. Contact Us</h2>
+                <p>If you have questions, concerns, or requests regarding this Privacy Policy or your data, please contact us:</p>
+                <ul>
+                    <li><strong>Email:</strong> privacy@4notes.com</li>
+                    <li><strong>Support Portal:</strong> Available through your account dashboard</li>
+                    <li><strong>Response Time:</strong> We aim to respond to all privacy inquiries within 48 hours</li>
+                </ul>
+
+                <h2>13. Your Consent</h2>
+                <p>By using 4notes, you consent to the collection, use, and storage of your information as described in this Privacy Policy. If you do not agree with this policy, please do not use our service.</p>
+
+                <div class="highlight-box" style="margin-top: 2rem;">
+                    <h3>Our Commitment to Your Privacy</h3>
+                    <p>At 4notes, we're committed to protecting your privacy while maintaining a safe, healthy community. We believe in transparency about how we handle your data and will always strive to balance privacy with community safety. Your trust is important to us, and we take our responsibility to protect your information seriously.</p>
+                </div>
+
+                <div class="info-box" style="margin-top: 1.5rem;">
+                    <h3>Questions or Concerns?</h3>
+                    <p>If you have any questions about how we handle your data or concerns about your privacy, please don't hesitate to reach out. We're here to help and committed to addressing your concerns promptly and transparently.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="signup-wrapper">
         <div class="left-panel">
             <div class="floating-notes">
@@ -33,8 +412,7 @@
                 <div class="logo-large">
                     <div class="logo-icon">
                         <svg viewBox="0 0 24 24" fill="white">
-                            <path
-                                d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z" />
+                            <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z" />
                             <path d="M8 15h8v2H8v-2zm0-4h8v2H8v-2zm0-4h5v2H8V7z" />
                         </svg>
                     </div>
@@ -79,11 +457,9 @@
                 <form id="registerForm" method="POST">
                     <div class="form-row">
                         <div class="form-group">
-                            <input type="text" id="firstName" name="firstName" class="form-input" placeholder=" "
-                                required>
+                            <input type="text" id="firstName" name="firstName" class="form-input" placeholder=" " required>
                             <label class="form-label" for="firstName">First name</label>
-                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
+                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                                 <circle cx="12" cy="7" r="4" />
                             </svg>
@@ -91,11 +467,9 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="text" id="lastName" name="lastName" class="form-input" placeholder=" "
-                                required>
+                            <input type="text" id="lastName" name="lastName" class="form-input" placeholder=" " required>
                             <label class="form-label" for="lastName">Last name</label>
-                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
+                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                                 <circle cx="12" cy="7" r="4" />
                             </svg>
@@ -115,32 +489,26 @@
 
                     <div class="form-group">
                         <div class="password-container">
-                            <input type="password" id="password" name="password" class="form-input" placeholder=" "
-                                required>
+                            <input type="password" id="password" name="password" class="form-input" placeholder=" " required>
                             <label class="form-label" for="password">Password</label>
-                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
+                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                                 <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                             </svg>
-                            <button type="button" class="toggle-password"
-                                onclick="togglePassword('password', this)">Show</button>
+                            <button type="button" class="toggle-password" onclick="togglePassword('password', this)">Show</button>
                         </div>
                         <div class="error-message" id="passwordError"></div>
                     </div>
 
                     <div class="form-group">
                         <div class="password-container">
-                            <input type="password" id="confirmPassword" name="confirmPassword" class="form-input"
-                                placeholder=" " required>
+                            <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" placeholder=" " required>
                             <label class="form-label" for="confirmPassword">Confirm password</label>
-                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
+                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                                 <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                             </svg>
-                            <button type="button" class="toggle-password"
-                                onclick="togglePassword('confirmPassword', this)">Show</button>
+                            <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword', this)">Show</button>
                         </div>
                         <div class="error-message" id="confirmPasswordError"></div>
                     </div>
@@ -149,8 +517,7 @@
                         <label class="terms-label">
                             <input type="checkbox" name="terms" class="checkbox" id="termsCheckbox" required>
                             <span class="terms-text">
-                                I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#"
-                                    class="terms-link">Privacy Policy</a>
+                                I agree to the <a class="terms-link" onclick="openModal('termsModal')">Terms of Service</a> and <a class="terms-link" onclick="openModal('privacyModal')">Privacy Policy</a>
                             </span>
                         </label>
                     </div>

@@ -113,6 +113,12 @@ function createNote() {
         return;
     }
 
+    // 🚫 Check content policy
+    if (violatesContentPolicy(title) || violatesContentPolicy(content)) {
+        alert('Your note contains prohibited or inappropriate content. Please remove it before saving.');
+        return;
+    }
+
     $.ajax({
         url: 'dashboard.php',
         type: 'POST',
@@ -181,6 +187,12 @@ function updateNote(noteId) {
 
     if (!title || !content) {
         alert('Title and content cannot be empty');
+        return;
+    }
+
+    // 🚫 Check content policy
+    if (violatesContentPolicy(title) || violatesContentPolicy(content)) {
+        alert('Your note contains prohibited or inappropriate content. Please remove it before updating.');
         return;
     }
 
@@ -308,6 +320,31 @@ function formatDateTime(date) {
         minute: '2-digit',
         hour12: true
     });
+}
+
+// 🔒 Content Policy Filter
+function violatesContentPolicy(text) {
+    const prohibitedPatterns = [
+        // Profanity & vulgar language
+        /\b(fuck|shit|bitch|asshole|bastard|dick|pussy|slut|whore|nigger|cunt)\b/i,
+
+        // Hate speech / discrimination keywords
+        /\b(kill all|hate|racist|bigot|terrorist|inferior race|go back to your country)\b/i,
+
+        // Sexual or explicit terms
+        /\b(sex|porn|nude|boobs|penis|vagina|xxx|erotic)\b/i,
+
+        // Violence / gore
+        /\b(kill|murder|blood|gore|slaughter|stab|shoot)\b/i,
+
+        // Self-harm / suicide
+        /\b(suicide|self harm|cutting myself|kill myself|want to die)\b/i,
+
+        // Illegal activities
+        /\b(drugs|cocaine|marijuana|terrorism|weapon|bomb|hack)\b/i
+    ];
+
+    return prohibitedPatterns.some(pattern => pattern.test(text));
 }
 
 // Initialize
